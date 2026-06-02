@@ -38,9 +38,58 @@
 
         .container {
             max-width: 1000px;
-            margin: 40px auto;
+            margin: 30px auto;
             padding: 0 20px;
         }
+
+        /* --- STYLE DES ONGLETS --- */
+        .tabs-nav {
+            display: flex;
+            gap: 10px;
+            overflow-x: auto;
+            padding-bottom: 15px;
+            margin-bottom: 25px;
+            scrollbar-width: none; /* Cache la barre sur Firefox */
+        }
+        
+        .tabs-nav::-webkit-scrollbar {
+            display: none; /* Cache la barre sur Chrome/Safari */
+        }
+
+        .tab-btn {
+            background: white;
+            border: 2px solid #2c7be5;
+            color: #2c7be5;
+            padding: 10px 20px;
+            border-radius: 25px;
+            cursor: pointer;
+            font-weight: bold;
+            font-size: 0.95rem;
+            white-space: nowrap;
+            transition: all 0.2s ease;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.05);
+        }
+
+        .tab-btn.active {
+            background: linear-gradient(135deg, #2c7be5, #00b4d8);
+            color: white;
+            border-color: transparent;
+        }
+
+        .tab-panel {
+            display: none;
+        }
+
+        .tab-panel.active {
+            display: block;
+            animation: fadeIn 0.3s ease;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        /* ------------------------- */
 
         .day {
             background: white;
@@ -123,226 +172,249 @@
 
     <div class="container">
 
-        <section class="day">
-            <h2>📅 Mardi 4 août</h2>
-            <img src="https://media-cdn.tripadvisor.com/media/photo-s/10/b0/0f/14/superdevoluy-en-ete.jpg" alt="Superdévoluy en été" class="day-img">
-            <ul>
-                <li>Rendez-vous à midi à Superdévoluy : <a href="https://maps.app.goo.gl/nVane3fxTB6QpMhM8" target="_blank">station</a></li>
-                <li>Pique-nique</li>
-                <li>Installation au studio (450S porte Obiou, Bois d’Aurouze)</li>
-                <li>Tour du Puy (4 km)</li>
-                <li>Promenade dans la station</li>
-                <li>Repas du soir (ratatouille)</li>
-            </ul>
-        </section>
+        <div class="tabs-nav">
+            <button class="tab-btn active" onclick="switchTab('programme')">📅 Programme</button>
+            <button class="tab-btn" onclick="switchTab('infos')">🎒 Infos & Matos</button>
+            <button class="tab-btn" onclick="switchTab('depenses')">💰 Dépenses</button>
+            <button class="tab-btn" onclick="switchTab('photos')">📸 Album Photo</button>
+            <button class="tab-btn" onclick="switchTab('contacts')">📞 Contacts</button>
+        </div>
 
-        <section class="day">
-            <h2>📅 Mercredi 5 août</h2>
-            <img src="https://static.alpes-isere.com/wp-content/uploads/2024/08/vue-aerienne-du-lac-du-sautet-en-matheysine-alexandre-gelin-895x435.jpg" alt="Vue aérienne du Lac du Sautet" class="day-img">
-            <ul>
-                <li>Lac du Sautet : <a href="https://maps.app.goo.gl/mKLJwge1GHhNJhcY7" target="_blank">voir le lac</a></li>
-                <li>Pique-nique</li>
-                <li>Randonnée (canal de Pellafol)</li>
-                <li>Pizzeria : <a href="https://maps.app.goo.gl/VdCi39uVpU7SJm4L8" target="_blank">restaurant</a></li>
-            </ul>
-        </section>
-
-        <section class="day">
-            <h2>📅 Jeudi 6 août</h2>
-            <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRcHnJlfNFe-MK1wed5LmPpuUDFON79efy2Ag&s" alt="Les Gillardes" class="day-img">
-            <ul>
-                <li>Gillardes</li>
-                <li>Pique-nique</li>
-                <li>Randonnée</li>
-                <li>Apéro en haut du Jas : <a href="https://maps.app.goo.gl/c7DxzZksEwxGxoNh7" target="_blank">voir le site</a></li>
-            </ul>
-        </section>
-
-        <section class="day">
-            <h2>📅 Vendredi 7 août</h2>
-            <img src="https://www.carnetsderando.net/wp-content/uploads/2021/04/P1100102.jpg" alt="Grande randonnée dans le Dévoluy" class="day-img">
-            <ul>
-                <li>Grande randonnée</li>
-                <li>15–20 km</li>
-                <li>6-7 h de marche avec pique-nique</li>
-                <li>Pause glace</li>
-            </ul>
-        </section>
-
-        <section class="day">
-            <h2>📅 Samedi 8 août</h2>
-            <img src="https://img2.oastatic.com/img2/80821033/max/variant.jpg" alt="Activité accrobranche" class="day-img">
-            <ul>
-                <li>Rangement du studio</li>
-                <li>Accrobranche : <a href="https://maps.app.goo.gl/Wo8SjjQ5Yizgy5di9" target="_blank">activité</a></li>
-                <li>Pique-nique</li>
-                <li>Dernière promenade</li>
-                <li>Retour (départ vers 15h)</li>
-            </ul>
-        </section>
-
-        <section class="day">
-            <h2>📍 Infos lieux importants</h2>
-            <ul>
-                <li>Station Superdévoluy : <a href="https://maps.app.goo.gl/nVane3fxTB6QpMhM8" target="_blank">Maps</a></li>
-                <li>Studio : 450S, porte Obiou – Bois d’Aurouze</li>
-                <li>Lac du Sautet : <a href="https://maps.app.goo.gl/mKLJwge1GHhNJhcY7" target="_blank">Maps</a></li>
-                <li>Pizzeria : <a href="https://maps.app.goo.gl/VdCi39uVpU7SJm4L8" target="_blank">Maps</a></li>
-                <li>Via ferrata : <a href="https://maps.app.goo.gl/4eFEdqaDXbaxhKZ8" target="_blank">Maps</a></li>
-                <li>Haut du Jas : <a href="https://maps.app.goo.gl/c7DxzZksEwxGxoNh7" target="_blank">Maps</a></li>
-                <li>Pic de Bure : <a href="https://maps.app.goo.gl/msnv9cwEfTciL91U6" target="_blank">Maps</a></li>
-                <li>Accrobranche : <a href="https://maps.app.goo.gl/Wo8SjjQ5Yizgy5di9" target="_blank">Maps</a></li>
-            </ul>
-        </section>
-
-        <section class="day">
-            <h2>🎒 Équipement & affaires à prendre</h2>
-
-            <h3>👕 Vêtements</h3>
-            <ul>
-                <li>5 tenues de sport</li>
-                <li>Chaussures de randonnée / sport</li>
-                <li>Polaire / pull</li>
-                <li>Coupe-vent / k-way</li>
-                <li>Casquette</li>
-                <li>Lunettes de soleil</li>
-                <li>Maillot de bain + serviette</li>
-                <li>Gants (via ferrata / accrobranche)</li>
-            </ul>
-
-            <h3>🧭 Matériel randonnée</h3>
-            <ul>
-                <li>Sac à dos</li>
-                <li>Sac isotherme (si possible)</li>
-                <li>Gourde</li>
-                <li>Poche téléphone étanche</li>
-            </ul>
-
-            <h3>🍞 Nourriture</h3>
-            <ul>
-                <li>Petit-déjeuners</li>
-                <li>Pique-nique jeudi midi</li>
-            </ul>
-
-            <h3>📱 Divers</h3>
-            <ul>
-                <li>Câble de recharge</li>
-            </ul>
-
-            <h3>🛡️ Santé</h3>
-            <ul>
-                <li>Crème solaire</li>
-                <li>Médicaments pour la route</li>
-            </ul>
-
-            <h3>🪪 Documents</h3>
-            <ul>
-                <li>CNI ou passeport</li>
-                <li>CB</li>
-                <li>Espèces</li>
-                <li>Permis de conduire et assurances</li>
-                <li>Carte Vitale (si vous avez)</li>
-            </ul>
-        </section>
-
-        <section class="day">
-            <h2>📞 Contacts</h2>
-            <ul>
-                <li><strong>Élise</strong> : 07 67 45 58 41</li>
-                <li><strong>Parents d'Élise</strong> : à compléter</li>
-
-                <li><strong>Titouan</strong> : 06 36 05 81 66</li>
-                <li><strong>Parents de Titouan</strong> : 06 21 08 50 39 (mère), 07 71 26 06 52 (père)</li>
-
-                <li><strong>Arthur</strong> : 06 01 42 92 90</li>
-                <li><strong>Parents d'Arthur</strong> : à compléter</li>
-
-                <li><strong>Jocelyne</strong> : 06 12 39 39 17</li>
-                <li><strong>Parents de Jocelyne</strong> : à compléter</li>
-
-                <li><strong>Julien</strong> : 07 49 06 05 05</li>
-                <li><strong>Parents de Julien</strong> : 06 75 04 67 54</li>
-
-                <li><strong>Élouan</strong> : 06 02 45 65 69</li>
-                <li><strong>Parents d'Élouan</strong> : à compléter</li>
-            </ul>
-        </section>
-<!-- 📸 SECTION ALBUM PHOTOS -->
-        <section class="day" id="photos-section">
-            <h2>📸 Album Photos du Séjour</h2>
-            <p style="margin-bottom: 20px; color: #555;">
-                Pour éviter d'inonder le groupe Snap et centraliser tous nos plus belles photos (paysages, rando), on utilise un album collaboratif. Tout le monde peut y jeter un œil et y ajouter ses propres photos !
-            </p>
-            
-            <div style="text-align: center; margin-top: 10px; margin-bottom: 25px;">
-                <!-- ⚠️ REMPLACE 'LIEN_DE_TON_ALBUM_ICI' PAR TON VRAI LIEN GOOGLE PHOTOS -->
-                <a href="https://photos.app.goo.gl/VKkHFQmbvXgQoSFh6" target="_blank" style="display: inline-block; padding: 15px 30px; background: linear-gradient(135deg, #4285F4, #EA4335, #FBBC05, #34A853); color: white; border-radius: 30px; font-weight: bold; font-size: 1.1rem; box-shadow: 0 4px 15px rgba(0,0,0,0.15); transition: transform 0.2s; text-decoration: none;">
-                    🚀 Rejoindre l'Album Partagé
-                </a>
-            </div>
-
-            <div style="background: #eef2f7; padding: 15px; border-radius: 10px; border-left: 5px solid #00b4d8; font-size: 0.95rem;">
-                📌 <strong>Mode d'emploi :</strong>
-                <ul style="margin-top: 5px; padding-left: 20px; list-style-type: disc;">
-                    <li>Clique sur le bouton ci-dessus pour ouvrir l'album.</li>
-                    <li>Clique sur l'icône <strong>"Rejoindre"</strong>.</li>
-                    <li>Tu peux maintenant ajouter tes photos directement depuis la galerie de ton téléphone pendant ou après le séjour !</li>
+        <div id="programme" class="tab-panel active">
+            <section class="day">
+                <h2>📅 Mardi 4 août</h2>
+                <img src="https://media-cdn.tripadvisor.com/media/photo-s/10/b0/0f/14/superdevoluy-en-ete.jpg" alt="Superdévoluy en été" class="day-img">
+                <ul>
+                    <li>Rendez-vous à midi à Superdévoluy : <a href="https://maps.app.goo.gl/nVane3fxTB6QpMhM8" target="_blank">station</a></li>
+                    <li>Pique-nique</li>
+                    <li>Installation au studio (450S porte Obiou, Bois d’Aurouze)</li>
+                    <li>Tour du Puy (4 km)</li>
+                    <li>Promenade dans la station</li>
+                    <li>Repas du soir (ratatouille)</li>
                 </ul>
-            </div>
-        </section>
-        <!-- 💰 NOUVELLE SECTION GESTION DES DÉPENSES -->
-        <section class="day" id="depenses-section">
-            <h2>💰 Gestion des Dépenses</h2>
-            
-            <!-- Formulaire d'ajout -->
-            <form id="expense-form" style="margin-bottom: 25px;">
-                <div style="display: flex; gap: 10px; flex-wrap: wrap;">
-                    <select id="expense-payer" required style="padding: 10px; border-radius: 8px; border: 1px solid #ccc; flex: 1; min-width: 140px;">
-                        <option value="">Qui a payé ?</option>
-                        <option value="Élise">Élise</option>
-                        <option value="Titouan">Titouan</option>
-                        <option value="Arthur">Arthur</option>
-                        <option value="Jocelyne">Jocelyne</option>
-                        <option value="Julien">Julien</option>
-                        <option value="Élouan">Élouan</option>
-                    </select>
-                    <input type="text" id="expense-title" placeholder="Description (ex: Pizzeria, Courses...)" required style="padding: 10px; border-radius: 8px; border: 1px solid #ccc; flex: 2; min-width: 200px;">
-                    <input type="number" id="expense-amount" step="0.01" min="0" placeholder="Montant (€)" required style="padding: 10px; border-radius: 8px; border: 1px solid #ccc; flex: 1; min-width: 100px;">
-                    <button type="submit" style="padding: 10px 20px; background: #2c7be5; color: white; border: none; border-radius: 8px; cursor: pointer; font-weight: bold;">Ajouter</button>
+            </section>
+
+            <section class="day">
+                <h2>📅 Mercredi 5 août</h2>
+                <img src="https://static.alpes-isere.com/wp-content/uploads/2024/08/vue-aerienne-du-lac-du-sautet-en-matheysine-alexandre-gelin-895x435.jpg" alt="Vue aérienne du Lac du Sautet" class="day-img">
+                <ul>
+                    <li>Lac du Sautet : <a href="https://maps.app.goo.gl/mKLJwge1GHhNJhcY7" target="_blank">voir le lac</a></li>
+                    <li>Pique-nique</li>
+                    <li>Randonnée (canal de Pellafol)</li>
+                    <li>Pizzeria : <a href="https://maps.app.goo.gl/VdCi39uVpU7SJm4L8" target="_blank">restaurant</a></li>
+                </ul>
+            </section>
+
+            <section class="day">
+                <h2>📅 Jeudi 6 août</h2>
+                <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRcHnJlfNFe-MK1wed5LmPpuUDFON79efy2Ag&s" alt="Les Gillardes" class="day-img">
+                <ul>
+                    <li>Gillardes</li>
+                    <li>Pique-nique</li>
+                    <li>Randonnée</li>
+                    <li>Apéro en haut du Jas : <a href="https://maps.app.goo.gl/c7DxzZksEwxGxoNh7" target="_blank">voir le site</a></li>
+                </ul>
+            </section>
+
+            <section class="day">
+                <h2>📅 Vendredi 7 août</h2>
+                <img src="https://www.carnetsderando.net/wp-content/uploads/2021/04/P1100102.jpg" alt="Grande randonnée dans le Dévoluy" class="day-img">
+                <ul>
+                    <li>Grande randonnée</li>
+                    <li>15–20 km</li>
+                    <li>6-7 h de marche avec pique-nique</li>
+                    <li>Pause glace</li>
+                </ul>
+            </section>
+
+            <section class="day">
+                <h2>📅 Samedi 8 août</h2>
+                <img src="https://img2.oastatic.com/img2/80821033/max/variant.jpg" alt="Activité accrobranche" class="day-img">
+                <ul>
+                    <li>Rangement du studio</li>
+                    <li>Accrobranche : <a href="https://maps.app.goo.gl/Wo8SjjQ5Yizgy5di9" target="_blank">activité</a></li>
+                    <li>Pique-nique</li>
+                    <li>Dernière promenade</li>
+                    <li>Retour (départ vers 15h)</li>
+                </ul>
+            </section>
+        </div>
+
+        <div id="infos" class="tab-panel">
+            <section class="day">
+                <h2>📍 Infos lieux importants</h2>
+                <ul>
+                    <li>Station Superdévoluy : <a href="https://maps.app.goo.gl/nVane3fxTB6QpMhM8" target="_blank">Maps</a></li>
+                    <li>Studio : 450S, porte Obiou – Bois d’Aurouze</li>
+                    <li>Lac du Sautet : <a href="https://maps.app.goo.gl/mKLJwge1GHhNJhcY7" target="_blank">Maps</a></li>
+                    <li>Pizzeria : <a href="https://maps.app.goo.gl/VdCi39uVpU7SJm4L8" target="_blank">Maps</a></li>
+                    <li>Via ferrata : <a href="https://maps.app.goo.gl/4eFEdqaDXbaxhKZ8" target="_blank">Maps</a></li>
+                    <li>Haut du Jas : <a href="https://maps.app.goo.gl/c7DxzZksEwxGxoNh7" target="_blank">Maps</a></li>
+                    <li>Pic de Bure : <a href="https://maps.app.goo.gl/msnv9cwEfTciL91U6" target="_blank">Maps</a></li>
+                    <li>Accrobranche : <a href="https://maps.app.goo.gl/Wo8SjjQ5Yizgy5di9" target="_blank">Maps</a></li>
+                </ul>
+            </section>
+
+            <section class="day">
+                <h2>🎒 Équipement & affaires à prendre</h2>
+
+                <h3>👕 Vêtements</h3>
+                <ul>
+                    <li>5 tenues de sport</li>
+                    <li>Chaussures de randonnée / sport</li>
+                    <li>Polaire / pull</li>
+                    <li>Coupe-vent / k-way</li>
+                    <li>Casquette</li>
+                    <li>Lunettes de soleil</li>
+                    <li>Maillot de bain + serviette</li>
+                    <li>Gants (via ferrata / accrobranche)</li>
+                </ul>
+
+                <h3>🧭 Matériel randonnée</h3>
+                <ul>
+                    <li>Sac à dos</li>
+                    <li>Sac isotherme (si possible)</li>
+                    <li>Gourde</li>
+                    <li>Poche téléphone étanche</li>
+                </ul>
+
+                <h3>🍞 Nourriture</h3>
+                <ul>
+                    <li>Petit-déjeuners</li>
+                    <li>Pique-nique jeudi midi</li>
+                </ul>
+
+                <h3>📱 Divers</h3>
+                <ul>
+                    <li>Câble de recharge</li>
+                </ul>
+
+                <h3>🛡️ Santé</h3>
+                <ul>
+                    <li>Crème solaire</li>
+                    <li>Médicaments pour la route</li>
+                </ul>
+
+                <h3>🪪 Documents</h3>
+                <ul>
+                    <li>CNI ou passeport</li>
+                    <li>CB</li>
+                    <li>Espèces</li>
+                    <li>Permis de conduire et assurances</li>
+                    <li>Carte Vitale (si vous avez)</li>
+                </ul>
+            </section>
+        </div>
+
+        <div id="depenses" class="tab-panel">
+            <section class="day" id="depenses-section">
+                <h2>💰 Gestion des Dépenses</h2>
+                
+                <form id="expense-form" style="margin-bottom: 25px;">
+                    <div style="display: flex; gap: 10px; flex-wrap: wrap;">
+                        <select id="expense-payer" required style="padding: 10px; border-radius: 8px; border: 1px solid #ccc; flex: 1; min-width: 140px;">
+                            <option value="">Qui a payé ?</option>
+                            <option value="Élise">Élise</option>
+                            <option value="Titouan">Titouan</option>
+                            <option value="Arthur">Arthur</option>
+                            <option value="Jocelyne">Jocelyne</option>
+                            <option value="Julien">Julien</option>
+                            <option value="Élouan">Élouan</option>
+                        </select>
+                        <input type="text" id="expense-title" placeholder="Description (ex: Pizzeria, Courses...)" required style="padding: 10px; border-radius: 8px; border: 1px solid #ccc; flex: 2; min-width: 200px;">
+                        <input type="number" id="expense-amount" step="0.01" min="0" placeholder="Montant (€)" required style="padding: 10px; border-radius: 8px; border: 1px solid #ccc; flex: 1; min-width: 100px;">
+                        <button type="submit" style="padding: 10px 20px; background: #2c7be5; color: white; border: none; border-radius: 8px; cursor: pointer; font-weight: bold;">Ajouter</button>
+                    </div>
+                </</form>
+
+                <h3>📊 Résumé financier</h3>
+                <div id="expense-summary" style="background: #eef2f7; padding: 20px; border-radius: 10px; margin-bottom: 25px; border-left: 5px solid #2c7be5;">
+                    <p style="margin-bottom: 5px;"><strong>Total dépensé par le groupe :</strong> <span id="total-amount" style="font-size: 1.2rem; color: #2c7be5; font-weight: bold;">0.00</span> €</p>
+                    <p style="margin-bottom: 15px;"><strong>Part par personne (6 participants) :</strong> <span id="per-person-amount" style="font-weight: bold;">0.00</span> €</p>
+                    <div id="individual-balances" style="margin-top: 10px; border-top: 1px solid #ddd; padding-top: 10px;">
+                        </div>
                 </div>
-            </form>
 
-            <!-- Résumé automatique -->
-            <h3>📊 Résumé financier</h3>
-            <div id="expense-summary" style="background: #eef2f7; padding: 20px; border-radius: 10px; margin-bottom: 25px; border-left: 5px solid #2c7be5;">
-                <p style="margin-bottom: 5px;"><strong>Total dépensé par le groupe :</strong> <span id="total-amount" style="font-size: 1.2rem; color: #2c7be5; font-weight: bold;">0.00</span> €</p>
-                <p style="margin-bottom: 15px;"><strong>Part par personne (6 participants) :</strong> <span id="per-person-amount" style="font-weight: bold;">0.00</span> €</p>
-                <div id="individual-balances" style="margin-top: 10px; border-top: 1px solid #ddd; padding-top: 10px;">
-                    <!-- Les soldes calculés apparaîtront ici -->
+                <h3>📜 Historique des paiements</h3>
+                <ul id="expenses-list" style="list-style: none; padding-left: 0; margin-top: 10px;">
+                    </ul>
+            </section>
+        </div>
+
+        <div id="photos" class="tab-panel">
+            <section class="day" id="photos-section">
+                <h2>📸 Album Photos du Séjour</h2>
+                <p style="margin-bottom: 20px; color: #555;">
+                    Pour éviter d'inonder le groupe Snap et centraliser tous nos plus belles photos (paysages, rando), on utilise un album collaboratif. Tout le monde peut y jeter un œil et y ajouter ses propres photos !
+                </p>
+                
+                <div style="text-align: center; margin-top: 10px; margin-bottom: 25px;">
+                    <a href="https://photos.app.goo.gl/VKkHFQmbvXgQoSFh6" target="_blank" style="display: inline-block; padding: 15px 30px; background: linear-gradient(135deg, #4285F4, #EA4335, #FBBC05, #34A853); color: white; border-radius: 30px; font-weight: bold; font-size: 1.1rem; box-shadow: 0 4px 15px rgba(0,0,0,0.15); transition: transform 0.2s; text-decoration: none;">
+                        🚀 Rejoindre l'Album Partagé
+                    </a>
                 </div>
-            </div>
 
-            <!-- Historique des dépenses -->
-            <h3>📜 Historique des paiements</h3>
-            <ul id="expenses-list" style="list-style: none; padding-left: 0; margin-top: 10px;">
-                <!-- Les lignes de dépenses s'ajouteront dynamiquement ici -->
-            </ul>
-        </section>
+                <div style="background: #eef2f7; padding: 15px; border-radius: 10px; border-left: 5px solid #00b4d8; font-size: 0.95rem;">
+                    📌 <strong>Mode d'emploi :</strong>
+                    <ul style="margin-top: 5px; padding-left: 20px; list-style-type: disc;">
+                        <li>Clique sur le bouton ci-dessus pour ouvrir l'album.</li>
+                        <li>Clique sur l'icône <strong>"Rejoindre"</strong>.</li>
+                        <li>Tu peux maintenant ajouter tes photos directement depuis la galerie de ton téléphone pendant ou après le séjour !</li>
+                    </ul>
+                </div>
+            </section>
+        </div>
 
-    </div><!-- fin du container -->
+        <div id="contacts" class="tab-panel">
+            <section class="day">
+                <h2>📞 Contacts</h2>
+                <ul>
+                    <li><strong>Élise</strong> : 07 67 45 58 41</li>
+                    <li><strong>Parents d'Élise</strong> : à compléter</li>
+                    <br>
+                    <li><strong>Titouan</strong> : 06 36 05 81 66</li>
+                    <li><strong>Parents de Titouan</strong> : 06 21 08 50 39 (mère), 07 71 26 06 52 (père)</li>
+                    <br>
+                    <li><strong>Arthur</strong> : 06 01 42 92 90</li>
+                    <li><strong>Parents d'Arthur</strong> : à compléter</li>
+                    <br>
+                    <li><strong>Jocelyne</strong> : 06 12 39 39 17</li>
+                    <li><strong>Parents de Jocelyne</strong> : à compléter</li>
+                    <br>
+                    <li><strong>Julien</strong> : 07 49 06 05 05</li>
+                    <li><strong>Parents de Julien</strong> : 06 75 04 67 54</li>
+                    <br>
+                    <li><strong>Élouan</strong> : 06 02 45 65 69</li>
+                    <li><strong>Parents d'Élouan</strong> : à compléter</li>
+                </ul>
+            </section>
+        </div>
 
-    <footer>
+    </div><footer>
         🏔️ Superdévoluy • Séjour organisé
     </footer>
 
-    <!-- LOGIQUE FIREBASE REALTIME DATABASE v10 -->
+    <script>
+        function switchTab(tabId) {
+            // Désactiver tous les boutons et tous les panneaux
+            document.querySelectorAll('.tab-btn').forEach(btn => btn.classList.remove('active'));
+            document.querySelectorAll('.tab-panel').forEach(panel => panel.classList.remove('active'));
+            
+            // Activer le bon bouton (via l'attribut onclick qui passe l'id ou via sélection textuelle)
+            const eventTarget = event.currentTarget;
+            eventTarget.classList.add('active');
+            
+            // Afficher le bon panneau
+            document.getElementById(tabId).classList.add('active');
+        }
+    </script>
+
     <script type="module">
         import { initializeApp } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-app.js";
         import { getDatabase, ref, push, onValue, remove } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-database.js";
         import { getAnalytics } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-analytics.js";
 
-        // Ta configuration Firebase Web App
-// Ta configuration Firebase Web App mise à jour
+        // Configuration Firebase Web App inchangée
         const firebaseConfig = {
             apiKey: "AIzaSyBlh3Re0vovY7iGA-AnNJUN2MVMB9msNdk",
             authDomain: "vacances-superdevoluy.firebaseapp.com",
@@ -351,7 +423,7 @@
             messagingSenderId: "164197720279",
             appId: "1:164197720279:web:8f2c41261bf95c9423d092",
             measurementId: "G-RDJQ1Y2943",
-            databaseURL: "https://vacances-superdevoluy-default-rtdb.europe-west1.firebasedatabase.app" // 👈 La voilà !
+            databaseURL: "https://vacances-superdevoluy-default-rtdb.europe-west1.firebasedatabase.app"
         };
 
         // Initialisation
