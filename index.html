@@ -268,11 +268,182 @@
             </ul>
         </section>
 
-    </div>
+        <!-- 💰 NOUVELLE SECTION GESTION DES DÉPENSES -->
+        <section class="day" id="depenses-section">
+            <h2>💰 Gestion des Dépenses</h2>
+            
+            <!-- Formulaire d'ajout -->
+            <form id="expense-form" style="margin-bottom: 25px;">
+                <div style="display: flex; gap: 10px; flex-wrap: wrap;">
+                    <select id="expense-payer" required style="padding: 10px; border-radius: 8px; border: 1px solid #ccc; flex: 1; min-width: 140px;">
+                        <option value="">Qui a payé ?</option>
+                        <option value="Élise">Élise</option>
+                        <option value="Titouan">Titouan</option>
+                        <option value="Arthur">Arthur</option>
+                        <option value="Jocelyne">Jocelyne</option>
+                        <option value="Julien">Julien</option>
+                        <option value="Élouan">Élouan</option>
+                    </select>
+                    <input type="text" id="expense-title" placeholder="Description (ex: Pizzeria, Courses...)" required style="padding: 10px; border-radius: 8px; border: 1px solid #ccc; flex: 2; min-width: 200px;">
+                    <input type="number" id="expense-amount" step="0.01" min="0" placeholder="Montant (€)" required style="padding: 10px; border-radius: 8px; border: 1px solid #ccc; flex: 1; min-width: 100px;">
+                    <button type="submit" style="padding: 10px 20px; background: #2c7be5; color: white; border: none; border-radius: 8px; cursor: pointer; font-weight: bold;">Ajouter</button>
+                </div>
+            </form>
+
+            <!-- Résumé automatique -->
+            <h3>📊 Résumé financier</h3>
+            <div id="expense-summary" style="background: #eef2f7; padding: 20px; border-radius: 10px; margin-bottom: 25px; border-left: 5px solid #2c7be5;">
+                <p style="margin-bottom: 5px;"><strong>Total dépensé par le groupe :</strong> <span id="total-amount" style="font-size: 1.2rem; color: #2c7be5; font-weight: bold;">0.00</span> €</p>
+                <p style="margin-bottom: 15px;"><strong>Part par personne (6 participants) :</strong> <span id="per-person-amount" style="font-weight: bold;">0.00</span> €</p>
+                <div id="individual-balances" style="margin-top: 10px; border-top: 1px solid #ddd; padding-top: 10px;">
+                    <!-- Les soldes calculés apparaîtront ici -->
+                </div>
+            </div>
+
+            <!-- Historique des dépenses -->
+            <h3>📜 Historique des paiements</h3>
+            <ul id="expenses-list" style="list-style: none; padding-left: 0; margin-top: 10px;">
+                <!-- Les lignes de dépenses s'ajouteront dynamiquement ici -->
+            </ul>
+        </section>
+
+    </div><!-- fin du container -->
 
     <footer>
         🏔️ Superdévoluy • Séjour organisé
     </footer>
 
+    <!-- LOGIQUE FIREBASE REALTIME DATABASE v10 -->
+    <script type="module">
+        import { initializeApp } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-app.js";
+        import { getDatabase, ref, push, onValue, remove } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-database.js";
+        import { getAnalytics } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-analytics.js";
+
+        // Ta configuration Firebase Web App
+        const firebaseConfig = {
+            apiKey: "AIzaSyBlh3Re0vovY7iGA-AnNJUN2MVMB9msNdk",
+            authDomain: "vacances-superdevoluy.firebaseapp.com",
+            projectId: "vacances-superdevoluy",
+            storageBucket: "vacances-superdevoluy.firebasestorage.app",
+            messagingSenderId: "164197720279",
+            appId: "1:164197720279:web:8f2c41261bf95c9423d092",
+            measurementId: "G-RDJQ1Y2943"
+        };
+
+        // Initialisation
+        const app = initializeApp(firebaseConfig);
+        const db = getDatabase(app);
+        const analytics = getAnalytics(app);
+
+        // Liste des 6 participants
+        const participants = ["Élise", "Titouan", "Arthur", "Jocelyne", "Julien", "Élouan"];
+
+        // Éléments du DOM
+        const expenseForm = document.getElementById('expense-form');
+        const expensesList = document.getElementById('expenses-list');
+        const totalAmountEl = document.getElementById('total-amount');
+        const perPersonAmountEl = document.getElementById('per-person-amount');
+        const individualBalancesEl = document.getElementById('individual-balances');
+
+        const expensesRef = ref(db, "expenses");
+
+        // Synchronisation en temps réel
+        onValue(expensesRef, (snapshot) => {
+            let totalGroup = 0;
+            let paidByEach = {};
+            
+            participants.forEach(p => paidByEach[p] = 0);
+            expensesList.innerHTML = "";
+
+            if (snapshot.exists()) {
+                snapshot.forEach((childSnapshot) => {
+                    const id = childSnapshot.key;
+                    const expense = childSnapshot.val();
+                    
+                    totalGroup += expense.amount;
+                    if (paidByEach[expense.payer] !== undefined) {
+                        paidByEach[expense.payer] += expense.amount;
+                    }
+
+                    // Création de l'élément visuel dans l'historique
+                    const li = document.createElement('li');
+                    li.style.background = '#fff';
+                    li.style.padding = '12px';
+                    li.style.marginBottom = '8px';
+                    li.style.borderRadius = '8px';
+                    li.style.boxShadow = '0 2px 5px rgba(0,0,0,0.05)';
+                    li.style.display = 'flex';
+                    li.style.justifyContent = 'space-between';
+                    li.style.alignItems = 'center';
+                    
+                    li.innerHTML = `
+                        <span><strong>${expense.payer}</strong> a payé <span style="color:#2c7be5; font-weight:bold;">${expense.amount.toFixed(2)}€</span> pour <em>${expense.title}</em></span>
+                        <button data-id="${id}" class="btn-delete" style="background: none; border: none; color: #dc3545; cursor: pointer; font-weight: bold; font-size: 1.1rem; padding: 0 5px;">✕</button>
+                    `;
+                    expensesList.insertBefore(li, expensesList.firstChild); // Plus récent en haut
+                });
+            }
+
+            // Calculs globaux
+            const perPersonShare = totalGroup / participants.length;
+            totalAmountEl.textContent = totalGroup.toFixed(2);
+            perPersonAmountEl.textContent = perPersonShare.toFixed(2);
+
+            // Rendu des comptes individuels
+            individualBalancesEl.innerHTML = '<h4 style="margin-bottom:10px; color:#444;">Soldes individuels :</h4>';
+            participants.forEach(p => {
+                const balance = paidByEach[p] - perPersonShare;
+                const pEl = document.createElement('p');
+                pEl.style.marginBottom = '4px';
+                pEl.style.fontSize = '0.95rem';
+
+                if (balance > 0) {
+                    pEl.innerHTML = `➡️ <strong>${p}</strong> a payé ${paidByEach[p].toFixed(2)}€ : <span style="color: #28a745; font-weight: bold;">+${balance.toFixed(2)} €</span> (doit recevoir)`;
+                } else if (balance < 0) {
+                    pEl.innerHTML = `⬅️ <strong>${p}</strong> a payé ${paidByEach[p].toFixed(2)}€ : <span style="color: #dc3545; font-weight: bold;">${balance.toFixed(2)} €</span> (doit donner)`;
+                } else {
+                    pEl.innerHTML = `✅ <strong>${p}</strong> a payé ${paidByEach[p].toFixed(2)}€ : <span style="color: #6c757d;">0.00 €</span> (à jour)`;
+                }
+                individualBalancesEl.appendChild(pEl);
+            });
+        });
+
+        // Enregistrer une nouvelle dépense
+        expenseForm.addEventListener('submit', async (e) => {
+            e.preventDefault();
+            const payer = document.getElementById('expense-payer').value;
+            const title = document.getElementById('expense-title').value;
+            const amount = parseFloat(document.getElementById('expense-amount').value);
+
+            if (payer && title && !isNaN(amount)) {
+                try {
+                    await push(expensesRef, {
+                        payer: payer,
+                        title: title,
+                        amount: amount,
+                        createdAt: Date.now()
+                    });
+                    expenseForm.reset();
+                } catch (error) {
+                    alert("Erreur d'envoi Firebase : " + error.message);
+                }
+            }
+        });
+
+        // Supprimer une ligne de dépense
+        expensesList.addEventListener('click', async (e) => {
+            if (e.target.classList.contains('btn-delete')) {
+                const id = e.target.getAttribute('data-id');
+                if (confirm("Supprimer cette dépense de l'historique ?")) {
+                    try {
+                        const exactExpenseRef = ref(db, `expenses/${id}`);
+                        await remove(exactExpenseRef);
+                    } catch (error) {
+                        alert("Erreur de suppression : " + error.message);
+                    }
+                }
+            }
+        });
+    </script>
 </body>
 </html>
