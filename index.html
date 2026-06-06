@@ -222,11 +222,11 @@
     <div class="container">
 
         <div class="tabs-nav">
-            <button class="tab-btn active" onclick="switchTab('programme')">📅 Programme</button>
-            <button class="tab-btn" onclick="switchTab('infos')">🎒 Infos & Matos</button>
-            <button class="tab-btn" onclick="switchTab('depenses')">💰 Dépenses</button>
-            <button class="tab-btn" onclick="switchTab('photos')">📸 Album Photo</button>
-            <button class="tab-btn" onclick="switchTab('contacts')">📞 Contacts</button>
+            <button class="tab-btn active" onclick="switchTab('programme', this)">📅 Programme</button>
+            <button class="tab-btn" onclick="switchTab('infos', this)">🎒 Infos & Matos</button>
+            <button class="tab-btn" onclick="switchTab('depenses', this)">💰 Dépenses</button>
+            <button class="tab-btn" onclick="switchTab('photos', this)">📸 Album Photo</button>
+            <button class="tab-btn" onclick="switchTab('contacts', this)">📞 Contacts</button>
         </div>
 
         <div id="programme" class="tab-panel active">
@@ -288,14 +288,14 @@
             <section class="day">
                 <h2>📍 Infos lieux importants</h2>
                 <ul>
-                    <li>Station Superdévoluy : <a href="https://maps.app.goo.gl/nVane3fxTB6QpMhM8" target="_blank">Maps</a></li>
+                    <li>Station Superdévoluy : <a href="https://maps.google.com" target="_blank">Maps</a></li>
                     <li>Studio : 450S, porte Obiou – Bois d’Aurouze</li>
-                    <li>Lac du Sautet : <a href="https://maps.app.goo.gl/mKLJwge1GHhNJhcY7" target="_blank">Maps</a></li>
-                    <li>Pizzeria : <a href="https://maps.app.goo.gl/VdCi39uVpU7SJm4L8" target="_blank">Maps</a></li>
-                    <li>Via ferrata : <a href="https://maps.app.goo.gl/4eFEdqaDXbaxhKZ8" target="_blank">Maps</a></li>
-                    <li>Haut du Jas : <a href="https://maps.app.goo.gl/c7DxzZksEwxGxoNh7" target="_blank">Maps</a></li>
-                    <li>Pic de Bure : <a href="https://maps.app.goo.gl/msnv9cwEfTciL91U6" target="_blank">Maps</a></li>
-                    <li>Accrobranche : <a href="https://maps.app.goo.gl/Wo8SjjQ5Yizgy5di9" target="_blank">Maps</a></li>
+                    <li>Lac du Sautet : <a href="https://maps.google.com" target="_blank">Maps</a></li>
+                    <li>Pizzeria : <a href="https://maps.google.com" target="_blank">Maps</a></li>
+                    <li>Via ferrata : <a href="https://maps.google.com" target="_blank">Maps</a></li>
+                    <li>Haut du Jas : <a href="https://maps.google.com" target="_blank">Maps</a></li>
+                    <li>Pic de Bure : <a href="https://maps.google.com" target="_blank">Maps</a></li>
+                    <li>Accrobranche : <a href="https://maps.google.com" target="_blank">Maps</a></li>
                 </ul>
             </section>
 
@@ -420,7 +420,7 @@
                     <li><strong>Parents de Titouan</strong> : 06 21 08 50 39 (mère), 07 71 26 06 52 (père)</li>
                     <br>
                     <li><strong>Arthur</strong> : 06 01 42 92 90</li>
-                    <li><strong>Parents d'Arthur</strong> : 06 18 83 11 15 (?)</li>
+                    <li><strong>Parents d'Arthur</strong> : 06 18 83 11 15</li>
                     <br>
                     <li><strong>Jocelyne</strong> : 06 12 39 39 17</li>
                     <li><strong>Parents de Jocelyne</strong> : 06 98 41 37 11 (mère), 06 60 07 59 93 (père)</li>
@@ -440,12 +440,14 @@
     </footer>
 
     <script>
-        function switchTab(tabId) {
+        // CORRECTION : Prise en charge du paramètre buttonEl pour éviter le bug global de 'event'
+        function switchTab(tabId, buttonEl) {
             document.querySelectorAll('.tab-btn').forEach(btn => btn.classList.remove('active'));
             document.querySelectorAll('.tab-panel').forEach(panel => panel.classList.remove('active'));
             
-            const eventTarget = event.currentTarget;
-            eventTarget.classList.add('active');
+            if (buttonEl) {
+                buttonEl.classList.add('active');
+            }
             
             document.getElementById(tabId).classList.add('active');
         }
@@ -456,7 +458,6 @@
         import { getDatabase, ref, push, onValue, remove, set } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-database.js";
         import { getAnalytics } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-analytics.js";
 
-        // Configuration Firebase Web App
         const firebaseConfig = {
             apiKey: "AIzaSyBlh3Re0vovY7iGA-AnNJUN2MVMB9msNdk",
             authDomain: "vacances-superdevoluy.firebaseapp.com",
@@ -468,20 +469,15 @@
             databaseURL: "https://vacances-superdevoluy-default-rtdb.europe-west1.firebasedatabase.app"
         };
 
-        // Initialisation
         const app = initializeApp(firebaseConfig);
         const db = getDatabase(app);
         const analytics = getAnalytics(app);
 
-        // Liste des 6 participants
         const participants = ["Élise", "Titouan", "Arthur", "Jocelyne", "Julien", "Élouan"];
 
-        // -------------------------------------------------------------
-        // PARTIE SYNCHRONISATION DU PROGRAMME VIA FIREBASE
-        // -------------------------------------------------------------
+        // --- CODE PROGRAMME FIREBASE ---
         const programRef = ref(db, "programmeTexts");
         
-        // Variables pour mémoriser le texte brut reçu de Firebase
         let currentProgramData = {
             mardi: "Rendez-vous à midi à Superdévoluy\nPique-nique\nInstallation au studio\nTour du Puy (4 km)\nPromenade dans la station\nRepas du soir (ratatouille)",
             mercredi: "Lac du Sautet\nPique-nique\nRandonnée (canal de Pellafol)\nPizzeria",
@@ -493,7 +489,6 @@
         const daysKeys = ['mardi', 'mercredi', 'jeudi', 'vendredi', 'samedi'];
         let currentEditingDayIndex = 0;
 
-        // Éléments du DOM pour le programme
         const editSection = document.getElementById('edit-section');
         const editDayLabel = document.getElementById('edit-day-label');
         const editDayText = document.getElementById('edit-day-text');
@@ -501,7 +496,6 @@
         const btnSaveProg = document.getElementById('btn-save-prog');
         const btnCancelProg = document.getElementById('btn-cancel-prog');
 
-        // Fonction pour transformer du texte brut avec sauts de lignes en balises <li>
         function generateListHTML(text, dayKey) {
             if (!text) return "<li>Rien de prévu pour le moment !</li>";
             return text.split('\n')
@@ -510,23 +504,19 @@
                        .join('');
         }
 
-        // Écouter les changements du programme sur Firebase en temps réel
         onValue(programRef, (snapshot) => {
             if (snapshot.exists()) {
                 currentProgramData = snapshot.val();
             } else {
-                // Si la base est vide à l'initialisation, on injecte les valeurs par défaut
                 set(programRef, currentProgramData);
             }
             
-            // Appliquer les textes reçus dans le HTML
             daysKeys.forEach(day => {
                 const listEl = document.getElementById(`list-${day}`);
                 if (listEl) listEl.innerHTML = generateListHTML(currentProgramData[day], day);
             });
         });
 
-        // Ouvrir le panneau de modification (on commence par le premier jour : mardi)
         btnEditMode.addEventListener('click', () => {
             currentEditingDayIndex = 0;
             openEditDay();
@@ -542,17 +532,14 @@
             editSection.scrollIntoView({ behavior: 'smooth' });
         }
 
-        // Sauvegarder l'étape en cours et passer au jour suivant (ou finaliser)
         btnSaveProg.addEventListener('click', async () => {
             const currentDayKey = daysKeys[currentEditingDayIndex];
             currentProgramData[currentDayKey] = editDayText.value;
 
             if (currentEditingDayIndex < daysKeys.length - 1) {
-                // Passer au jour suivant
                 currentEditingDayIndex++;
                 openEditDay();
             } else {
-                // Dernier jour validé -> On envoie tout sur Firebase d'un coup
                 try {
                     await set(programRef, currentProgramData);
                     closeEditMode();
@@ -562,7 +549,6 @@
             }
         });
 
-        // Annuler la modification
         btnCancelProg.addEventListener('click', closeEditMode);
 
         function closeEditMode() {
@@ -570,10 +556,7 @@
             btnEditMode.style.display = 'block';
         }
 
-
-        // -------------------------------------------------------------
-        // PARTIE GESTION DES DÉPENSES (Restée intacte)
-        // -------------------------------------------------------------
+        // --- GESTION DES DÉPENSES ---
         const expenseForm = document.getElementById('expense-form');
         const expensesList = document.getElementById('expenses-list');
         const totalAmountEl = document.getElementById('total-amount');
@@ -660,7 +643,8 @@
             }
         });
 
-        expensesList.addEventListener('click', async (e) => {
+        // CORRECTION : Utilisation de l'élément récupéré correctement en haut du module script
+        document.getElementById('expenses-list').addEventListener('click', async (e) => {
             if (e.target.classList.contains('btn-delete')) {
                 const id = e.target.getAttribute('data-id');
                 if (confirm("Supprimer cette dépense de l'historique ?")) {
