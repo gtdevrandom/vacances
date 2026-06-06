@@ -143,6 +143,54 @@
             text-decoration: underline;
         }
 
+        /* --- ZONE ÉDITION PROGRAMME --- */
+        .edit-container {
+            background: white;
+            padding: 20px;
+            border-radius: 15px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.08);
+            margin-top: 20px;
+        }
+
+        .edit-textarea {
+            width: 100%;
+            height: 150px;
+            padding: 12px;
+            border-radius: 8px;
+            border: 1px solid #ccc;
+            font-family: Arial, sans-serif;
+            font-size: 1rem;
+            resize: vertical;
+            margin-bottom: 15px;
+        }
+
+        .btn-action {
+            padding: 10px 20px;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            font-weight: bold;
+            transition: background 0.2s;
+        }
+
+        .btn-edit-trigger {
+            background: #00b4d8;
+            color: white;
+            display: block;
+            margin: 0 auto 25px auto;
+        }
+
+        .btn-save {
+            background: #28a745;
+            color: white;
+        }
+
+        .btn-cancel {
+            background: #dc3545;
+            color: white;
+            margin-left: 10px;
+        }
+
         footer {
             text-align: center;
             padding: 30px;
@@ -182,61 +230,56 @@
         </div>
 
         <div id="programme" class="tab-panel active">
+            <button id="btn-edit-mode" class="btn-action btn-edit-trigger">✏️ Modifier le Programme Général</button>
+
+            <div id="edit-section" class="edit-container" style="display: none; margin-bottom: 25px;">
+                <h3 style="margin-bottom: 10px;">Modifier les activités du séjour</h3>
+                <p style="font-size: 0.85rem; color: #666; margin-bottom: 10px;">Sépare chaque activité par un retour à la ligne pour recréer la liste à puces automatiquement.</p>
+                
+                <h4 id="edit-day-label">Mardi 4 août</h4>
+                <textarea id="edit-day-text" class="edit-textarea"></textarea>
+                
+                <button id="btn-save-prog" class="btn-action btn-save">Enregistrer</button>
+                <button id="btn-cancel-prog" class="btn-action btn-cancel">Annuler</button>
+            </div>
+
             <section class="day">
                 <h2>📅 Mardi 4 août</h2>
                 <img src="https://media-cdn.tripadvisor.com/media/photo-s/10/b0/0f/14/superdevoluy-en-ete.jpg" alt="Superdévoluy en été" class="day-img">
-                <ul>
-                    <li>Rendez-vous à midi à Superdévoluy : <a href="https://maps.app.goo.gl/nVane3fxTB6QpMhM8" target="_blank">station</a></li>
-                    <li>Pique-nique</li>
-                    <li>Installation au studio (450S porte Obiou, Bois d’Aurouze)</li>
-                    <li>Tour du Puy (4 km)</li>
-                    <li>Promenade dans la station</li>
-                    <li>Repas du soir (ratatouille)</li>
+                <ul id="list-mardi">
+                    <li>Chargement du programme...</li>
                 </ul>
             </section>
 
             <section class="day">
                 <h2>📅 Mercredi 5 août</h2>
                 <img src="https://static.alpes-isere.com/wp-content/uploads/2024/08/vue-aerienne-du-lac-du-sautet-en-matheysine-alexandre-gelin-895x435.jpg" alt="Vue aérienne du Lac du Sautet" class="day-img">
-                <ul>
-                    <li>Lac du Sautet : <a href="https://maps.app.goo.gl/mKLJwge1GHhNJhcY7" target="_blank">voir le lac</a></li>
-                    <li>Pique-nique</li>
-                    <li>Randonnée (canal de Pellafol)</li>
-                    <li>Pizzeria : <a href="https://maps.app.goo.gl/VdCi39uVpU7SJm4L8" target="_blank">restaurant</a></li>
+                <ul id="list-mercredi">
+                    <li>Chargement du programme...</li>
                 </ul>
             </section>
 
             <section class="day">
                 <h2>📅 Jeudi 6 août</h2>
                 <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRcHnJlfNFe-MK1wed5LmPpuUDFON79efy2Ag&s" alt="Les Gillardes" class="day-img">
-                <ul>
-                    <li>Gillardes</li>
-                    <li>Pique-nique</li>
-                    <li>Randonnée</li>
-                    <li>Apéro en haut du Jas : <a href="https://maps.app.goo.gl/c7DxzZksEwxGxoNh7" target="_blank">voir le site</a></li>
+                <ul id="list-jeudi">
+                    <li>Chargement du programme...</li>
                 </ul>
             </section>
 
             <section class="day">
                 <h2>📅 Vendredi 7 août</h2>
                 <img src="https://www.carnetsderando.net/wp-content/uploads/2021/04/P1100102.jpg" alt="Grande randonnée dans le Dévoluy" class="day-img">
-                <ul>
-                    <li>Grande randonnée</li>
-                    <li>15–20 km</li>
-                    <li>6-7 h de marche avec pique-nique</li>
-                    <li>Pause glace</li>
+                <ul id="list-vendredi">
+                    <li>Chargement du programme...</li>
                 </ul>
             </section>
 
             <section class="day">
                 <h2>📅 Samedi 8 août</h2>
                 <img src="https://img2.oastatic.com/img2/80821033/max/variant.jpg" alt="Activité accrobranche" class="day-img">
-                <ul>
-                    <li>Rangement du studio</li>
-                    <li>Accrobranche : <a href="https://maps.app.goo.gl/Wo8SjjQ5Yizgy5di9" target="_blank">activité</a></li>
-                    <li>Pique-nique</li>
-                    <li>Dernière promenade</li>
-                    <li>Retour (départ vers 15h)</li>
+                <ul id="list-samedi">
+                    <li>Chargement du programme...</li>
                 </ul>
             </section>
         </div>
@@ -326,7 +369,7 @@
                         <input type="number" id="expense-amount" step="0.01" min="0" placeholder="Montant (€)" required style="padding: 10px; border-radius: 8px; border: 1px solid #ccc; flex: 1; min-width: 100px;">
                         <button type="submit" style="padding: 10px 20px; background: #2c7be5; color: white; border: none; border-radius: 8px; cursor: pointer; font-weight: bold;">Ajouter</button>
                     </div>
-                </</form>
+                </form>
 
                 <h3>📊 Résumé financier</h3>
                 <div id="expense-summary" style="background: #eef2f7; padding: 20px; border-radius: 10px; margin-bottom: 25px; border-left: 5px solid #2c7be5;">
@@ -391,31 +434,29 @@
             </section>
         </div>
 
-    </div><footer>
+    </div>
+    <footer>
         🏔️ Superdévoluy • Séjour organisé
     </footer>
 
     <script>
         function switchTab(tabId) {
-            // Désactiver tous les boutons et tous les panneaux
             document.querySelectorAll('.tab-btn').forEach(btn => btn.classList.remove('active'));
             document.querySelectorAll('.tab-panel').forEach(panel => panel.classList.remove('active'));
             
-            // Activer le bon bouton (via l'attribut onclick qui passe l'id ou via sélection textuelle)
             const eventTarget = event.currentTarget;
             eventTarget.classList.add('active');
             
-            // Afficher le bon panneau
             document.getElementById(tabId).classList.add('active');
         }
     </script>
 
     <script type="module">
         import { initializeApp } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-app.js";
-        import { getDatabase, ref, push, onValue, remove } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-database.js";
+        import { getDatabase, ref, push, onValue, remove, set } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-database.js";
         import { getAnalytics } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-analytics.js";
 
-        // Configuration Firebase Web App inchangée
+        // Configuration Firebase Web App
         const firebaseConfig = {
             apiKey: "AIzaSyBlh3Re0vovY7iGA-AnNJUN2MVMB9msNdk",
             authDomain: "vacances-superdevoluy.firebaseapp.com",
@@ -435,7 +476,104 @@
         // Liste des 6 participants
         const participants = ["Élise", "Titouan", "Arthur", "Jocelyne", "Julien", "Élouan"];
 
-        // Éléments du DOM
+        // -------------------------------------------------------------
+        // PARTIE SYNCHRONISATION DU PROGRAMME VIA FIREBASE
+        // -------------------------------------------------------------
+        const programRef = ref(db, "programmeTexts");
+        
+        // Variables pour mémoriser le texte brut reçu de Firebase
+        let currentProgramData = {
+            mardi: "Rendez-vous à midi à Superdévoluy\nPique-nique\nInstallation au studio\nTour du Puy (4 km)\nPromenade dans la station\nRepas du soir (ratatouille)",
+            mercredi: "Lac du Sautet\nPique-nique\nRandonnée (canal de Pellafol)\nPizzeria",
+            jeudi: "Gillardes\nPique-nique\nRandonnée\nApéro en haut du Jas",
+            vendredi: "Grande randonnée\n15–20 km\n6-7 h de marche avec pique-nique\nPause glace",
+            samedi: "Rangement du studio\nAccrobranche\nPique-nique\nDernière promenade\nRetour (départ vers 15h)"
+        };
+
+        const daysKeys = ['mardi', 'mercredi', 'jeudi', 'vendredi', 'samedi'];
+        let currentEditingDayIndex = 0;
+
+        // Éléments du DOM pour le programme
+        const editSection = document.getElementById('edit-section');
+        const editDayLabel = document.getElementById('edit-day-label');
+        const editDayText = document.getElementById('edit-day-text');
+        const btnEditMode = document.getElementById('btn-edit-mode');
+        const btnSaveProg = document.getElementById('btn-save-prog');
+        const btnCancelProg = document.getElementById('btn-cancel-prog');
+
+        // Fonction pour transformer du texte brut avec sauts de lignes en balises <li>
+        function generateListHTML(text, dayKey) {
+            if (!text) return "<li>Rien de prévu pour le moment !</li>";
+            return text.split('\n')
+                       .filter(line => line.trim() !== "")
+                       .map(line => `<li>${line.trim()}</li>`)
+                       .join('');
+        }
+
+        // Écouter les changements du programme sur Firebase en temps réel
+        onValue(programRef, (snapshot) => {
+            if (snapshot.exists()) {
+                currentProgramData = snapshot.val();
+            } else {
+                // Si la base est vide à l'initialisation, on injecte les valeurs par défaut
+                set(programRef, currentProgramData);
+            }
+            
+            // Appliquer les textes reçus dans le HTML
+            daysKeys.forEach(day => {
+                const listEl = document.getElementById(`list-${day}`);
+                if (listEl) listEl.innerHTML = generateListHTML(currentProgramData[day], day);
+            });
+        });
+
+        // Ouvrir le panneau de modification (on commence par le premier jour : mardi)
+        btnEditMode.addEventListener('click', () => {
+            currentEditingDayIndex = 0;
+            openEditDay();
+        });
+
+        function openEditDay() {
+            const currentDayKey = daysKeys[currentEditingDayIndex];
+            editDayLabel.textContent = `Jour ${currentEditingDayIndex + 1}/${daysKeys.length} : Journée du ${currentDayKey.charAt(0).toUpperCase() + currentDayKey.slice(1)}`;
+            editDayText.value = currentProgramData[currentDayKey] || "";
+            
+            editSection.style.display = 'block';
+            btnEditMode.style.display = 'none';
+            editSection.scrollIntoView({ behavior: 'smooth' });
+        }
+
+        // Sauvegarder l'étape en cours et passer au jour suivant (ou finaliser)
+        btnSaveProg.addEventListener('click', async () => {
+            const currentDayKey = daysKeys[currentEditingDayIndex];
+            currentProgramData[currentDayKey] = editDayText.value;
+
+            if (currentEditingDayIndex < daysKeys.length - 1) {
+                // Passer au jour suivant
+                currentEditingDayIndex++;
+                openEditDay();
+            } else {
+                // Dernier jour validé -> On envoie tout sur Firebase d'un coup
+                try {
+                    await set(programRef, currentProgramData);
+                    closeEditMode();
+                } catch (error) {
+                    alert("Erreur lors de la mise à jour du programme : " + error.message);
+                }
+            }
+        });
+
+        // Annuler la modification
+        btnCancelProg.addEventListener('click', closeEditMode);
+
+        function closeEditMode() {
+            editSection.style.display = 'none';
+            btnEditMode.style.display = 'block';
+        }
+
+
+        // -------------------------------------------------------------
+        // PARTIE GESTION DES DÉPENSES (Restée intacte)
+        // -------------------------------------------------------------
         const expenseForm = document.getElementById('expense-form');
         const expensesList = document.getElementById('expenses-list');
         const totalAmountEl = document.getElementById('total-amount');
@@ -444,7 +582,6 @@
 
         const expensesRef = ref(db, "expenses");
 
-        // Synchronisation en temps réel
         onValue(expensesRef, (snapshot) => {
             let totalGroup = 0;
             let paidByEach = {};
@@ -462,7 +599,6 @@
                         paidByEach[expense.payer] += expense.amount;
                     }
 
-                    // Création de l'élément visuel dans l'historique
                     const li = document.createElement('li');
                     li.style.background = '#fff';
                     li.style.padding = '12px';
@@ -477,16 +613,14 @@
                         <span><strong>${expense.payer}</strong> a payé <span style="color:#2c7be5; font-weight:bold;">${expense.amount.toFixed(2)}€</span> pour <em>${expense.title}</em></span>
                         <button data-id="${id}" class="btn-delete" style="background: none; border: none; color: #dc3545; cursor: pointer; font-weight: bold; font-size: 1.1rem; padding: 0 5px;">✕</button>
                     `;
-                    expensesList.insertBefore(li, expensesList.firstChild); // Plus récent en haut
+                    expensesList.insertBefore(li, expensesList.firstChild);
                 });
             }
 
-            // Calculs globaux
             const perPersonShare = totalGroup / participants.length;
             totalAmountEl.textContent = totalGroup.toFixed(2);
             perPersonAmountEl.textContent = perPersonShare.toFixed(2);
 
-            // Rendu des comptes individuels
             individualBalancesEl.innerHTML = '<h4 style="margin-bottom:10px; color:#444;">Soldes individuels :</h4>';
             participants.forEach(p => {
                 const balance = paidByEach[p] - perPersonShare;
@@ -505,7 +639,6 @@
             });
         });
 
-        // Enregistrer une nouvelle dépense
         expenseForm.addEventListener('submit', async (e) => {
             e.preventDefault();
             const payer = document.getElementById('expense-payer').value;
@@ -527,7 +660,6 @@
             }
         });
 
-        // Supprimer une ligne de dépense
         expensesList.addEventListener('click', async (e) => {
             if (e.target.classList.contains('btn-delete')) {
                 const id = e.target.getAttribute('data-id');
