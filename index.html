@@ -43,18 +43,17 @@
             padding: 0 20px;
         }
 
-        /* --- STYLE DES ONGLETS --- */
         .tabs-nav {
             display: flex;
             gap: 10px;
             overflow-x: auto;
             padding-bottom: 15px;
             margin-bottom: 25px;
-            scrollbar-width: none; /* Cache la barre sur Firefox */
+            scrollbar-width: none;
         }
         
         .tabs-nav::-webkit-scrollbar {
-            display: none; /* Cache la barre sur Chrome/Safari */
+            display: none;
         }
 
         .tab-btn {
@@ -90,7 +89,6 @@
             from { opacity: 0; transform: translateY(10px); }
             to { opacity: 1; transform: translateY(0); }
         }
-        /* ------------------------- */
 
         .day {
             background: white;
@@ -143,7 +141,6 @@
             text-decoration: underline;
         }
 
-        /* --- ZONE ÉDITION PROGRAMME --- */
         .edit-container {
             background: white;
             padding: 20px;
@@ -191,6 +188,65 @@
             margin-left: 10px;
         }
 
+        /* --- STYLES ÉDITION INFOS/MATOS --- */
+        .section-header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            margin-top: 15px;
+            margin-bottom: 10px;
+        }
+
+        .section-header h3 {
+            margin: 0;
+            color: #444;
+        }
+
+        .btn-edit-section {
+            background: none;
+            border: 1.5px solid #00b4d8;
+            color: #00b4d8;
+            border-radius: 20px;
+            padding: 3px 12px;
+            font-size: 0.8rem;
+            cursor: pointer;
+            font-weight: bold;
+            transition: all 0.2s;
+            white-space: nowrap;
+        }
+
+        .btn-edit-section:hover {
+            background: #00b4d8;
+            color: white;
+        }
+
+        .inline-edit-box {
+            display: none;
+            background: #f8faff;
+            border: 1px solid #dce6f7;
+            border-radius: 10px;
+            padding: 15px;
+            margin-bottom: 10px;
+        }
+
+        .inline-edit-box textarea {
+            width: 100%;
+            height: 120px;
+            padding: 10px;
+            border-radius: 8px;
+            border: 1px solid #ccc;
+            font-family: Arial, sans-serif;
+            font-size: 0.95rem;
+            resize: vertical;
+            margin-bottom: 10px;
+        }
+
+        .inline-edit-box p.hint {
+            font-size: 0.8rem;
+            color: #888;
+            margin-bottom: 10px;
+        }
+
         footer {
             text-align: center;
             padding: 30px;
@@ -230,149 +286,156 @@
             <button class="tab-btn" onclick="switchTab('infos-medicales', this)">🏥 Infos médicales</button>
         </div>
 
+        <!-- ===== PROGRAMME ===== -->
         <div id="programme" class="tab-panel active">
 
             <section class="day">
                 <h2>📅 Mardi 4 août</h2>
                 <img src="https://media-cdn.tripadvisor.com/media/photo-s/10/b0/0f/14/superdevoluy-en-ete.jpg" alt="Superdévoluy en été" class="day-img">
-                <ul id="list-mardi">
-                    <li>Chargement du programme...</li>
-                </ul>
+                <ul id="list-mardi"><li>Chargement...</li></ul>
             </section>
 
             <section class="day">
                 <h2>📅 Mercredi 5 août</h2>
                 <img src="https://static.alpes-isere.com/wp-content/uploads/2024/08/vue-aerienne-du-lac-du-sautet-en-matheysine-alexandre-gelin-895x435.jpg" alt="Vue aérienne du Lac du Sautet" class="day-img">
-                <ul id="list-mercredi">
-                    <li>Chargement du programme...</li>
-                </ul>
+                <ul id="list-mercredi"><li>Chargement...</li></ul>
             </section>
 
             <section class="day">
                 <h2>📅 Jeudi 6 août</h2>
                 <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRcHnJlfNFe-MK1wed5LmPpuUDFON79efy2Ag&s" alt="Les Gillardes" class="day-img">
-                <ul id="list-jeudi">
-                    <li>Chargement du programme...</li>
-                </ul>
+                <ul id="list-jeudi"><li>Chargement...</li></ul>
             </section>
 
             <section class="day">
                 <h2>📅 Vendredi 7 août</h2>
                 <img src="https://www.carnetsderando.net/wp-content/uploads/2021/04/P1100102.jpg" alt="Grande randonnée dans le Dévoluy" class="day-img">
-                <ul id="list-vendredi">
-                    <li>Chargement du programme...</li>
-                </ul>
+                <ul id="list-vendredi"><li>Chargement...</li></ul>
             </section>
 
             <section class="day">
                 <h2>📅 Samedi 8 août</h2>
                 <img src="https://img2.oastatic.com/img2/80821033/max/variant.jpg" alt="Activité accrobranche" class="day-img">
-                <ul id="list-samedi">
-                    <li>Chargement du programme...</li>
-                </ul>
+                <ul id="list-samedi"><li>Chargement...</li></ul>
             </section>
+
             <button id="btn-edit-mode" class="btn-action btn-edit-trigger">✏️ Modifier le Programme Général</button>
 
             <div id="edit-section" class="edit-container" style="display: none; margin-bottom: 25px;">
                 <h3 style="margin-bottom: 10px;">Modifier les activités du séjour</h3>
                 <p style="font-size: 0.85rem; color: #666; margin-bottom: 10px;">Sépare chaque activité par un retour à la ligne pour recréer la liste à puces automatiquement.</p>
-                
                 <h4 id="edit-day-label">Mardi 4 août</h4>
                 <textarea id="edit-day-text" class="edit-textarea"></textarea>
-                
                 <button id="btn-save-prog" class="btn-action btn-save">Enregistrer</button>
                 <button id="btn-cancel-prog" class="btn-action btn-cancel">Annuler</button>
             </div>
         </div>
 
+        <!-- ===== INFOS & MATOS ===== -->
         <div id="infos" class="tab-panel">
+
+            <!-- Lieux importants -->
             <section class="day">
                 <h2>📍 Infos lieux importants</h2>
-                    <div style="margin-bottom:20px;padding:15px;background:#eef2f7;border-radius:10px;border-left:5px solid #2c7be5;">
-                        <strong>🚗 Itinéraire principal :</strong><br>
-                        <a href="https://maps.app.goo.gl/MEU63tAS28P1jTsz8" target="_blank" rel="noopener noreferrer">Ouvrir l'itinéraire Google Maps</a>
-                    </div>
-                <ul>
-                    <li>Station Superdévoluy : <a href="https://maps.google.com" target="_blank">Maps</a></li>
-                    <li>Studio : 450S, porte Obiou – Bois d’Aurouze</li>
-                    <li>Lac du Sautet : <a href="https://maps.google.com" target="_blank">Maps</a></li>
-                    <li>Pizzeria : <a href="https://maps.google.com" target="_blank">Maps</a></li>
-                    <li>Accrobranche : <a href="https://maps.google.com" target="_blank">Maps</a></li>
-                </ul>
+                <div style="margin-bottom:20px;padding:15px;background:#eef2f7;border-radius:10px;border-left:5px solid #2c7be5;">
+                    <strong>🚗 Itinéraire principal :</strong><br>
+                    <a href="https://maps.app.goo.gl/MEU63tAS28P1jTsz8" target="_blank" rel="noopener noreferrer">Ouvrir l'itinéraire Google Maps</a>
+                </div>
+                <ul id="list-lieux"><li>Chargement...</li></ul>
             </section>
 
+            <!-- Équipement & affaires -->
             <section class="day">
                 <h2>🎒 Équipement & affaires à prendre</h2>
-                <h3>👕 Divers</h3>
-                <ul>
-                    <li>Repas Mardi soir</li>
-                    <li>Sac poubelle</li>
-                    <li>Papier hygiénique</li>
-                    <li>Sac poubelle</li>
-                    <li>Mouchoirs</li>
-                    <li>Sopalin</li>
-                    <li>Torchons vaisselle</li>
-                    <li>Lingettes</li>
-                </ul>
 
-                <h3>👕 Vêtements</h3>
-                <ul>
-                    <li>Drapes / sac de couchage / taie d'oreiller</li>
-                    <li>Matelas une place</li>
-                    <li>5 tenues de sport</li>
-                    <li>Chaussures de randonnée / sport</li>
-                    <li>Polaire / pull</li>
-                    <li>Coupe-vent / k-way</li>
-                    <li>Casquette</li>
-                    <li>Lunettes de soleil</li>
-                    <li>Maillot de bain + serviette</li>
-                    <li>Gants (via ferrata / accrobranche)</li>
-                </ul>
+                <div class="section-header">
+                    <h3>👕 Divers</h3>
+                    <button class="btn-edit-section" onclick="toggleInlineEdit('divers')">✏️ Modifier</button>
+                </div>
+                <div class="inline-edit-box" id="edit-box-divers">
+                    <p class="hint">Une ligne = un élément de la liste.</p>
+                    <textarea id="textarea-divers"></textarea>
+                    <button class="btn-action btn-save" onclick="saveMatosSection('divers')">💾 Enregistrer</button>
+                    <button class="btn-action btn-cancel" onclick="toggleInlineEdit('divers')">Annuler</button>
+                </div>
+                <ul id="list-divers"><li>Chargement...</li></ul>
 
-                <h3>🧭 Matériel</h3>
-                <ul>
-                    <li>Sac à dos</li>
-                    <li>Sac à linge sale</li>
-                    <li>Sac plastique maillot de bain</li>
-                    <li>Sac isotherme (si possible)</li>
-                    <li>Gourde</li>
-                    <li>Boules de pétanque</li>
-                    <li>Ballon de foot</li>
-                    <li>Skate/rollers</li>
-                    <li>Poche téléphone étanche</li>
-                    <li>Bâtons de marche</li>
-                </ul>
+                <div class="section-header">
+                    <h3>👕 Vêtements</h3>
+                    <button class="btn-edit-section" onclick="toggleInlineEdit('vetements')">✏️ Modifier</button>
+                </div>
+                <div class="inline-edit-box" id="edit-box-vetements">
+                    <p class="hint">Une ligne = un élément de la liste.</p>
+                    <textarea id="textarea-vetements"></textarea>
+                    <button class="btn-action btn-save" onclick="saveMatosSection('vetements')">💾 Enregistrer</button>
+                    <button class="btn-action btn-cancel" onclick="toggleInlineEdit('vetements')">Annuler</button>
+                </div>
+                <ul id="list-vetements"><li>Chargement...</li></ul>
 
-                <h3>🍞 Nourriture</h3>
-                <ul>
-                    <li>Petit-déjeuners</li>
-                    <li>Pique-nique jeudi midi</li>
-                </ul>
+                <div class="section-header">
+                    <h3>🧭 Matériel</h3>
+                    <button class="btn-edit-section" onclick="toggleInlineEdit('materiel')">✏️ Modifier</button>
+                </div>
+                <div class="inline-edit-box" id="edit-box-materiel">
+                    <p class="hint">Une ligne = un élément de la liste.</p>
+                    <textarea id="textarea-materiel"></textarea>
+                    <button class="btn-action btn-save" onclick="saveMatosSection('materiel')">💾 Enregistrer</button>
+                    <button class="btn-action btn-cancel" onclick="toggleInlineEdit('materiel')">Annuler</button>
+                </div>
+                <ul id="list-materiel"><li>Chargement...</li></ul>
 
-                <h3>📱 Divers</h3>
-                <ul>
-                    <li>Câble de recharge</li>
-                </ul>
+                <div class="section-header">
+                    <h3>🍞 Nourriture</h3>
+                    <button class="btn-edit-section" onclick="toggleInlineEdit('nourriture')">✏️ Modifier</button>
+                </div>
+                <div class="inline-edit-box" id="edit-box-nourriture">
+                    <p class="hint">Une ligne = un élément de la liste.</p>
+                    <textarea id="textarea-nourriture"></textarea>
+                    <button class="btn-action btn-save" onclick="saveMatosSection('nourriture')">💾 Enregistrer</button>
+                    <button class="btn-action btn-cancel" onclick="toggleInlineEdit('nourriture')">Annuler</button>
+                </div>
+                <ul id="list-nourriture"><li>Chargement...</li></ul>
 
-                <h3>🛡️ Santé</h3>
-                <ul>
-                    <li>Crème solaire</li>
-                    <li>Après soleil</li>
-                    <li>Médicaments pour la route</li>
-                    <li>Antihistaminique</li>
-                </ul>
+                <div class="section-header">
+                    <h3>📱 Électronique</h3>
+                    <button class="btn-edit-section" onclick="toggleInlineEdit('electronique')">✏️ Modifier</button>
+                </div>
+                <div class="inline-edit-box" id="edit-box-electronique">
+                    <p class="hint">Une ligne = un élément de la liste.</p>
+                    <textarea id="textarea-electronique"></textarea>
+                    <button class="btn-action btn-save" onclick="saveMatosSection('electronique')">💾 Enregistrer</button>
+                    <button class="btn-action btn-cancel" onclick="toggleInlineEdit('electronique')">Annuler</button>
+                </div>
+                <ul id="list-electronique"><li>Chargement...</li></ul>
 
-                <h3>🪪 Documents</h3>
-                <ul>
-                    <li>CNI ou passeport</li>
-                    <li>CB</li>
-                    <li>Espèces</li>
-                    <li>Permis de conduire et assurances</li>
-                    <li>Carte Vitale (si vous avez)</li>
-                </ul>
+                <div class="section-header">
+                    <h3>🛡️ Santé</h3>
+                    <button class="btn-edit-section" onclick="toggleInlineEdit('sante')">✏️ Modifier</button>
+                </div>
+                <div class="inline-edit-box" id="edit-box-sante">
+                    <p class="hint">Une ligne = un élément de la liste.</p>
+                    <textarea id="textarea-sante"></textarea>
+                    <button class="btn-action btn-save" onclick="saveMatosSection('sante')">💾 Enregistrer</button>
+                    <button class="btn-action btn-cancel" onclick="toggleInlineEdit('sante')">Annuler</button>
+                </div>
+                <ul id="list-sante"><li>Chargement...</li></ul>
+
+                <div class="section-header">
+                    <h3>🪪 Documents</h3>
+                    <button class="btn-edit-section" onclick="toggleInlineEdit('documents')">✏️ Modifier</button>
+                </div>
+                <div class="inline-edit-box" id="edit-box-documents">
+                    <p class="hint">Une ligne = un élément de la liste.</p>
+                    <textarea id="textarea-documents"></textarea>
+                    <button class="btn-action btn-save" onclick="saveMatosSection('documents')">💾 Enregistrer</button>
+                    <button class="btn-action btn-cancel" onclick="toggleInlineEdit('documents')">Annuler</button>
+                </div>
+                <ul id="list-documents"><li>Chargement...</li></ul>
+
             </section>
         </div>
 
+        <!-- ===== DÉPENSES ===== -->
         <div id="depenses" class="tab-panel">
             <section class="day" id="depenses-section">
                 <h2>💰 Gestion des Dépenses</h2>
@@ -398,29 +461,26 @@
                 <div id="expense-summary" style="background: #eef2f7; padding: 20px; border-radius: 10px; margin-bottom: 25px; border-left: 5px solid #2c7be5;">
                     <p style="margin-bottom: 5px;"><strong>Total dépensé par le groupe :</strong> <span id="total-amount" style="font-size: 1.2rem; color: #2c7be5; font-weight: bold;">0.00</span> €</p>
                     <p style="margin-bottom: 15px;"><strong>Part par personne (6 participants) :</strong> <span id="per-person-amount" style="font-weight: bold;">0.00</span> €</p>
-                    <div id="individual-balances" style="margin-top: 10px; border-top: 1px solid #ddd; padding-top: 10px;">
-                        </div>
+                    <div id="individual-balances" style="margin-top: 10px; border-top: 1px solid #ddd; padding-top: 10px;"></div>
                 </div>
 
                 <h3>📜 Historique des paiements</h3>
-                <ul id="expenses-list" style="list-style: none; padding-left: 0; margin-top: 10px;">
-                    </ul>
+                <ul id="expenses-list" style="list-style: none; padding-left: 0; margin-top: 10px;"></ul>
             </section>
         </div>
 
+        <!-- ===== PHOTOS ===== -->
         <div id="photos" class="tab-panel">
             <section class="day" id="photos-section">
                 <h2>📸 Album Photos du Séjour</h2>
                 <p style="margin-bottom: 20px; color: #555;">
                     Pour éviter d'inonder le groupe Snap et centraliser tous nos plus belles photos (paysages, rando), on utilise un album collaboratif. Tout le monde peut y jeter un œil et y ajouter ses propres photos !
                 </p>
-                
                 <div style="text-align: center; margin-top: 10px; margin-bottom: 25px;">
                     <a href="https://photos.app.goo.gl/VKkHFQmbvXgQoSFh6" target="_blank" style="display: inline-block; padding: 15px 30px; background: linear-gradient(135deg, #4285F4, #EA4335, #FBBC05, #34A853); color: white; border-radius: 30px; font-weight: bold; font-size: 1.1rem; box-shadow: 0 4px 15px rgba(0,0,0,0.15); transition: transform 0.2s; text-decoration: none;">
                         🚀 Rejoindre l'Album Partagé
                     </a>
                 </div>
-
                 <div style="background: #eef2f7; padding: 15px; border-radius: 10px; border-left: 5px solid #00b4d8; font-size: 0.95rem;">
                     📌 <strong>Mode d'emploi :</strong>
                     <ul style="margin-top: 5px; padding-left: 20px; list-style-type: disc;">
@@ -432,6 +492,7 @@
             </section>
         </div>
 
+        <!-- ===== CONTACTS ===== -->
         <div id="contacts" class="tab-panel">
             <section class="day">
                 <h2>📞 Contacts</h2>
@@ -457,9 +518,10 @@
             </section>
         </div>
 
+        <!-- ===== INFOS MÉDICALES ===== -->
         <div id="infos-medicales" class="tab-panel">
             <section class="day">
-                <h2>📞 Infos médicales</h2>
+                <h2>🏥 Infos médicales</h2>
                 <ul>
                     <li><strong>Élise</strong> : Allergies accariens, pollen et morphine</li>
                     <br>
@@ -477,28 +539,43 @@
         </div>
 
     </div>
+
     <footer>
         🏔️ Superdévoluy • Séjour organisé
     </footer>
 
     <script>
-        // CORRECTION : Prise en charge du paramètre buttonEl pour éviter le bug global de 'event'
         function switchTab(tabId, buttonEl) {
             document.querySelectorAll('.tab-btn').forEach(btn => btn.classList.remove('active'));
             document.querySelectorAll('.tab-panel').forEach(panel => panel.classList.remove('active'));
-            
-            if (buttonEl) {
-                buttonEl.classList.add('active');
-            }
-            
+            if (buttonEl) buttonEl.classList.add('active');
             document.getElementById(tabId).classList.add('active');
+        }
+
+        // Ouvre/ferme une boîte d'édition inline et pré-remplit le textarea
+        function toggleInlineEdit(section) {
+            const box = document.getElementById('edit-box-' + section);
+            const textarea = document.getElementById('textarea-' + section);
+            const isOpen = box.style.display === 'block';
+
+            if (!isOpen) {
+                // Récupère le texte actuel de la liste pour pré-remplir
+                const ul = document.getElementById('list-' + section);
+                const items = Array.from(ul.querySelectorAll('li')).map(li => li.textContent.trim());
+                textarea.value = items.join('\n');
+                box.style.display = 'block';
+                textarea.focus();
+            } else {
+                box.style.display = 'none';
+            }
         }
     </script>
 
     <script type="module">
         import { initializeApp } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-app.js";
-        import { getDatabase, ref, push, onValue, remove, set } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-database.js";
+        import { getDatabase, ref, onValue, set } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-database.js";
         import { getAnalytics } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-analytics.js";
+        import { push, remove } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-database.js";
 
         const firebaseConfig = {
             apiKey: "AIzaSyBlh3Re0vovY7iGA-AnNJUN2MVMB9msNdk",
@@ -517,9 +594,10 @@
 
         const participants = ["Élise", "Titouan", "Arthur", "Jocelyne", "Julien", "Élouan"];
 
-        // --- CODE PROGRAMME FIREBASE ---
+        // =====================================================
+        // PROGRAMME
+        // =====================================================
         const programRef = ref(db, "programmeTexts");
-        
         let currentProgramData = {
             mardi: "Rendez-vous à midi à Superdévoluy\nPique-nique\nInstallation au studio\nTour du Puy (4 km)\nPromenade dans la station\nRepas du soir (ratatouille)",
             mercredi: "Lac du Sautet\nPique-nique\nRandonnée (canal de Pellafol)\nPizzeria",
@@ -538,12 +616,9 @@
         const btnSaveProg = document.getElementById('btn-save-prog');
         const btnCancelProg = document.getElementById('btn-cancel-prog');
 
-        function generateListHTML(text, dayKey) {
+        function generateListHTML(text) {
             if (!text) return "<li>Rien de prévu pour le moment !</li>";
-            return text.split('\n')
-                       .filter(line => line.trim() !== "")
-                       .map(line => `<li>${line.trim()}</li>`)
-                       .join('');
+            return text.split('\n').filter(l => l.trim()).map(l => `<li>${l.trim()}</li>`).join('');
         }
 
         onValue(programRef, (snapshot) => {
@@ -552,32 +627,26 @@
             } else {
                 set(programRef, currentProgramData);
             }
-            
             daysKeys.forEach(day => {
-                const listEl = document.getElementById(`list-${day}`);
-                if (listEl) listEl.innerHTML = generateListHTML(currentProgramData[day], day);
+                const el = document.getElementById(`list-${day}`);
+                if (el) el.innerHTML = generateListHTML(currentProgramData[day]);
             });
         });
 
-        btnEditMode.addEventListener('click', () => {
-            currentEditingDayIndex = 0;
-            openEditDay();
-        });
+        btnEditMode.addEventListener('click', () => { currentEditingDayIndex = 0; openEditDay(); });
 
         function openEditDay() {
-            const currentDayKey = daysKeys[currentEditingDayIndex];
-            editDayLabel.textContent = `Jour ${currentEditingDayIndex + 1}/${daysKeys.length} : Journée du ${currentDayKey.charAt(0).toUpperCase() + currentDayKey.slice(1)}`;
-            editDayText.value = currentProgramData[currentDayKey] || "";
-            
+            const key = daysKeys[currentEditingDayIndex];
+            editDayLabel.textContent = `Jour ${currentEditingDayIndex + 1}/${daysKeys.length} : Journée du ${key.charAt(0).toUpperCase() + key.slice(1)}`;
+            editDayText.value = currentProgramData[key] || "";
             editSection.style.display = 'block';
             btnEditMode.style.display = 'none';
             editSection.scrollIntoView({ behavior: 'smooth' });
         }
 
         btnSaveProg.addEventListener('click', async () => {
-            const currentDayKey = daysKeys[currentEditingDayIndex];
-            currentProgramData[currentDayKey] = editDayText.value;
-
+            const key = daysKeys[currentEditingDayIndex];
+            currentProgramData[key] = editDayText.value;
             if (currentEditingDayIndex < daysKeys.length - 1) {
                 currentEditingDayIndex++;
                 openEditDay();
@@ -585,9 +654,7 @@
                 try {
                     await set(programRef, currentProgramData);
                     closeEditMode();
-                } catch (error) {
-                    alert("Erreur lors de la mise à jour du programme : " + error.message);
-                }
+                } catch (e) { alert("Erreur : " + e.message); }
             }
         });
 
@@ -598,19 +665,72 @@
             btnEditMode.style.display = 'block';
         }
 
-        // --- GESTION DES DÉPENSES ---
+        // =====================================================
+        // INFOS & MATOS — données par défaut
+        // =====================================================
+        const defaultMatosData = {
+            lieux: "Station Superdévoluy : https://maps.google.com\nStudio : 450S, porte Obiou – Bois d'Aurouze\nLac du Sautet : https://maps.google.com\nPizzeria : https://maps.google.com\nAccrobranche : https://maps.google.com",
+            divers: "Repas Mardi soir\nSac poubelle\nPapier hygiénique\nMouchoirs\nSopalin\nTorchons vaisselle\nLingettes",
+            vetements: "Drapes / sac de couchage / taie d'oreiller\nMatelas une place\n5 tenues de sport\nChaussures de randonnée / sport\nPolaire / pull\nCoupe-vent / k-way\nCasquette\nLunettes de soleil\nMaillot de bain + serviette\nGants (via ferrata / accrobranche)",
+            materiel: "Sac à dos\nSac à linge sale\nSac plastique maillot de bain\nSac isotherme (si possible)\nGourde\nBoules de pétanque\nBallon de foot\nSkate/rollers\nPoche téléphone étanche\nBâtons de marche",
+            nourriture: "Petit-déjeuners\nPique-nique jeudi midi",
+            electronique: "Câble de recharge",
+            sante: "Crème solaire\nAprès soleil\nMédicaments pour la route\nAntihistaminique",
+            documents: "CNI ou passeport\nCB\nEspèces\nPermis de conduire et assurances\nCarte Vitale (si vous avez)"
+        };
+
+        const matosSections = ['lieux', 'divers', 'vetements', 'materiel', 'nourriture', 'electronique', 'sante', 'documents'];
+        const matosRef = ref(db, "matosData");
+        let currentMatosData = { ...defaultMatosData };
+
+        // Rendu d'une section matos
+        function renderMatosSection(key, text) {
+            const ul = document.getElementById('list-' + key);
+            if (!ul) return;
+            if (!text) { ul.innerHTML = "<li>Rien pour le moment.</li>"; return; }
+            ul.innerHTML = text.split('\n').filter(l => l.trim()).map(l => {
+                const urlRegex = /(https?:\/\/[^\s]+)/g;
+                const linked = l.trim().replace(urlRegex, '<a href="$1" target="_blank">Maps</a>');
+                // Si la ligne contient une URL brute (pas de texte avant), afficher seulement le lien
+                return `<li>${linked}</li>`;
+            }).join('');
+        }
+
+        onValue(matosRef, (snapshot) => {
+            if (snapshot.exists()) {
+                currentMatosData = snapshot.val();
+            } else {
+                set(matosRef, defaultMatosData);
+            }
+            matosSections.forEach(key => renderMatosSection(key, currentMatosData[key]));
+        });
+
+        // Exposer saveMatosSection globalement pour les boutons inline
+        window.saveMatosSection = async function(section) {
+            const textarea = document.getElementById('textarea-' + section);
+            currentMatosData[section] = textarea.value;
+            try {
+                await set(matosRef, currentMatosData);
+                // Ferme la boîte après sauvegarde
+                document.getElementById('edit-box-' + section).style.display = 'none';
+            } catch (e) {
+                alert("Erreur de sauvegarde : " + e.message);
+            }
+        };
+
+        // =====================================================
+        // DÉPENSES
+        // =====================================================
         const expenseForm = document.getElementById('expense-form');
         const expensesList = document.getElementById('expenses-list');
         const totalAmountEl = document.getElementById('total-amount');
         const perPersonAmountEl = document.getElementById('per-person-amount');
         const individualBalancesEl = document.getElementById('individual-balances');
-
         const expensesRef = ref(db, "expenses");
 
         onValue(expensesRef, (snapshot) => {
             let totalGroup = 0;
             let paidByEach = {};
-            
             participants.forEach(p => paidByEach[p] = 0);
             expensesList.innerHTML = "";
 
@@ -618,26 +738,13 @@
                 snapshot.forEach((childSnapshot) => {
                     const id = childSnapshot.key;
                     const expense = childSnapshot.val();
-                    
                     totalGroup += expense.amount;
-                    if (paidByEach[expense.payer] !== undefined) {
-                        paidByEach[expense.payer] += expense.amount;
-                    }
+                    if (paidByEach[expense.payer] !== undefined) paidByEach[expense.payer] += expense.amount;
 
                     const li = document.createElement('li');
-                    li.style.background = '#fff';
-                    li.style.padding = '12px';
-                    li.style.marginBottom = '8px';
-                    li.style.borderRadius = '8px';
-                    li.style.boxShadow = '0 2px 5px rgba(0,0,0,0.05)';
-                    li.style.display = 'flex';
-                    li.style.justifyContent = 'space-between';
-                    li.style.alignItems = 'center';
-                    
-                    li.innerHTML = `
-                        <span><strong>${expense.payer}</strong> a payé <span style="color:#2c7be5; font-weight:bold;">${expense.amount.toFixed(2)}€</span> pour <em>${expense.title}</em></span>
-                        <button data-id="${id}" class="btn-delete" style="background: none; border: none; color: #dc3545; cursor: pointer; font-weight: bold; font-size: 1.1rem; padding: 0 5px;">✕</button>
-                    `;
+                    li.style.cssText = 'background:#fff;padding:12px;margin-bottom:8px;border-radius:8px;box-shadow:0 2px 5px rgba(0,0,0,0.05);display:flex;justify-content:space-between;align-items:center;';
+                    li.innerHTML = `<span><strong>${expense.payer}</strong> a payé <span style="color:#2c7be5;font-weight:bold;">${expense.amount.toFixed(2)}€</span> pour <em>${expense.title}</em></span>
+                        <button data-id="${id}" class="btn-delete" style="background:none;border:none;color:#dc3545;cursor:pointer;font-weight:bold;font-size:1.1rem;padding:0 5px;">✕</button>`;
                     expensesList.insertBefore(li, expensesList.firstChild);
                 });
             }
@@ -646,20 +753,14 @@
             totalAmountEl.textContent = totalGroup.toFixed(2);
             perPersonAmountEl.textContent = perPersonShare.toFixed(2);
 
-            individualBalancesEl.innerHTML = '<h4 style="margin-bottom:10px; color:#444;">Soldes individuels :</h4>';
+            individualBalancesEl.innerHTML = '<h4 style="margin-bottom:10px;color:#444;">Soldes individuels :</h4>';
             participants.forEach(p => {
                 const balance = paidByEach[p] - perPersonShare;
                 const pEl = document.createElement('p');
-                pEl.style.marginBottom = '4px';
-                pEl.style.fontSize = '0.95rem';
-
-                if (balance > 0) {
-                    pEl.innerHTML = `➡️ <strong>${p}</strong> a payé ${paidByEach[p].toFixed(2)}€ : <span style="color: #28a745; font-weight: bold;">+${balance.toFixed(2)} €</span> (doit recevoir)`;
-                } else if (balance < 0) {
-                    pEl.innerHTML = `⬅️ <strong>${p}</strong> a payé ${paidByEach[p].toFixed(2)}€ : <span style="color: #dc3545; font-weight: bold;">${balance.toFixed(2)} €</span> (doit donner)`;
-                } else {
-                    pEl.innerHTML = `✅ <strong>${p}</strong> a payé ${paidByEach[p].toFixed(2)}€ : <span style="color: #6c757d;">0.00 €</span> (à jour)`;
-                }
+                pEl.style.cssText = 'margin-bottom:4px;font-size:0.95rem;';
+                if (balance > 0) pEl.innerHTML = `➡️ <strong>${p}</strong> a payé ${paidByEach[p].toFixed(2)}€ : <span style="color:#28a745;font-weight:bold;">+${balance.toFixed(2)} €</span> (doit recevoir)`;
+                else if (balance < 0) pEl.innerHTML = `⬅️ <strong>${p}</strong> a payé ${paidByEach[p].toFixed(2)}€ : <span style="color:#dc3545;font-weight:bold;">${balance.toFixed(2)} €</span> (doit donner)`;
+                else pEl.innerHTML = `✅ <strong>${p}</strong> a payé ${paidByEach[p].toFixed(2)}€ : <span style="color:#6c757d;">0.00 €</span> (à jour)`;
                 individualBalancesEl.appendChild(pEl);
             });
         });
@@ -669,33 +770,21 @@
             const payer = document.getElementById('expense-payer').value;
             const title = document.getElementById('expense-title').value;
             const amount = parseFloat(document.getElementById('expense-amount').value);
-
             if (payer && title && !isNaN(amount)) {
                 try {
-                    await push(expensesRef, {
-                        payer: payer,
-                        title: title,
-                        amount: amount,
-                        createdAt: Date.now()
-                    });
+                    await push(expensesRef, { payer, title, amount, createdAt: Date.now() });
                     expenseForm.reset();
-                } catch (error) {
-                    alert("Erreur d'envoi Firebase : " + error.message);
-                }
+                } catch (e) { alert("Erreur Firebase : " + e.message); }
             }
         });
 
-        // CORRECTION : Utilisation de l'élément récupéré correctement en haut du module script
         document.getElementById('expenses-list').addEventListener('click', async (e) => {
             if (e.target.classList.contains('btn-delete')) {
                 const id = e.target.getAttribute('data-id');
-                if (confirm("Supprimer cette dépense de l'historique ?")) {
+                if (confirm("Supprimer cette dépense ?")) {
                     try {
-                        const exactExpenseRef = ref(db, `expenses/${id}`);
-                        await remove(exactExpenseRef);
-                    } catch (error) {
-                        alert("Erreur de suppression : " + error.message);
-                    }
+                        await remove(ref(db, `expenses/${id}`));
+                    } catch (e) { alert("Erreur : " + e.message); }
                 }
             }
         });
