@@ -3,6 +3,9 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="theme-color" content="#2c7be5">
+    <meta name="description" content="Informations, documents et plan du séjour à Superdévoluy">
+    <link rel="manifest" href="manifest.json">
     <link rel="icon" type="image/png" href="image/favicon.png">
     <title>Séjour à Superdévoluy - 4 au 8 août</title>
 
@@ -253,6 +256,92 @@
             color: #666;
         }
 
+        .password-screen {
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+            background: linear-gradient(135deg, #2c7be5, #00b4d8);
+        }
+
+        .password-card {
+            background: white;
+            border-radius: 20px;
+            padding: 30px;
+            width: min(100%, 420px);
+            box-shadow: 0 20px 45px rgba(0,0,0,0.2);
+            text-align: center;
+        }
+
+        .password-card h2 {
+            margin-bottom: 10px;
+            color: #2c7be5;
+        }
+
+        .password-card p {
+            margin-bottom: 15px;
+            color: #555;
+        }
+
+        .password-card input {
+            width: 100%;
+            padding: 12px 14px;
+            border-radius: 10px;
+            border: 1px solid #ccc;
+            margin-bottom: 12px;
+            font-size: 1rem;
+        }
+
+        .password-card button {
+            width: 100%;
+            padding: 12px 14px;
+            border: none;
+            border-radius: 10px;
+            background: linear-gradient(135deg, #2c7be5, #00b4d8);
+            color: white;
+            font-weight: bold;
+            cursor: pointer;
+        }
+
+        .password-error {
+            margin-top: 10px;
+            color: #dc3545;
+            min-height: 1.2rem;
+        }
+
+        .app-hidden {
+            display: none !important;
+        }
+
+        .docx-list {
+            list-style: none;
+            padding: 0;
+            display: grid;
+            gap: 12px;
+        }
+
+        .docx-link {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 12px 14px;
+            border-radius: 10px;
+            background: #eef2f7;
+            color: #2c7be5;
+            font-weight: 600;
+            text-decoration: none;
+        }
+
+        .docx-link:hover {
+            background: #dfe9f5;
+            text-decoration: none;
+        }
+
+        .docx-link span {
+            font-size: 0.95rem;
+        }
+
         @media (max-width: 700px) {
             header h1 {
                 font-size: 2rem;
@@ -269,275 +358,189 @@
     </style>
 </head>
 <body>
+    <div id="password-screen" class="password-screen">
+        <form id="password-form" class="password-card">
+            <h2>🔐 Accès protégé</h2>
+            <p>Entrez le mot de passe pour ouvrir le site.</p>
+            <input id="password-input" type="password" placeholder="Mot de passe" autocomplete="current-password" required>
+            <button type="submit">Entrer</button>
+            <p id="password-error" class="password-error"></p>
+        </form>
+    </div>
 
-    <header>
-        <h1>🏔️ Séjour à Superdévoluy</h1>
-        <p>Du mardi 4 août au samedi 8 août</p>
-    </header>
+    <div id="app-content" class="app-hidden">
+        <header>
+            <h1>🏔️ Séjour à Superdévoluy</h1>
+            <p>Du mardi 4 août au samedi 8 août</p>
+        </header>
 
-    <div class="container">
+        <div class="container">
+            <div class="tabs-nav">
+                <button class="tab-btn active" onclick="switchTab('programme', this)">📅 Programme</button>
+                <button class="tab-btn" onclick="switchTab('infos', this)">🎒 Infos & Matos</button>
+                <button class="tab-btn" onclick="switchTab('depenses', this)">💰 Dépenses</button>
+                <button class="tab-btn" onclick="switchTab('photos', this)">📸 Album Photo</button>
+                <button class="tab-btn" onclick="switchTab('contacts', this)">📞 Contacts</button>
+                <button class="tab-btn" onclick="switchTab('infos-medicales', this)">🏥 Infos médicales</button>
+            </div>
 
-        <div class="tabs-nav">
-            <button class="tab-btn active" onclick="switchTab('programme', this)">📅 Programme</button>
-            <button class="tab-btn" onclick="switchTab('infos', this)">🎒 Infos & Matos</button>
-            <button class="tab-btn" onclick="switchTab('depenses', this)">💰 Dépenses</button>
-            <button class="tab-btn" onclick="switchTab('photos', this)">📸 Album Photo</button>
-            <button class="tab-btn" onclick="switchTab('contacts', this)">📞 Contacts</button>
-            <button class="tab-btn" onclick="switchTab('infos-medicales', this)">🏥 Infos médicales</button>
-        </div>
+            <div id="programme" class="tab-panel active">
+                <section class="day">
+                    <h2>📅 Mardi 4 août</h2>
+                    <img src="https://media-cdn.tripadvisor.com/media/photo-s/10/b0/0f/14/superdevoluy-en-ete.jpg" alt="Superdévoluy en été" class="day-img">
+                    <ul>
+                        <li>Rendez-vous à midi à Superdévoluy</li>
+                        <li>Pique-nique</li>
+                        <li>Installation au studio</li>
+                        <li>Tour du Puy (4 km)</li>
+                        <li>Promenade dans la station</li>
+                        <li>Repas du soir (ratatouille)</li>
+                    </ul>
+                </section>
 
-        <!-- ===== PROGRAMME ===== -->
-        <div id="programme" class="tab-panel active">
+                <section class="day">
+                    <h2>📅 Mercredi 5 août</h2>
+                    <img src="https://static.alpes-isere.com/wp-content/uploads/2024/08/vue-aerienne-du-lac-du-sautet-en-matheysine-alexandre-gelin-895x435.jpg" alt="Vue aérienne du Lac du Sautet" class="day-img">
+                    <ul>
+                        <li>Lac du Sautet</li>
+                        <li>Pique-nique</li>
+                        <li>Randonnée (canal de Pellafol)</li>
+                        <li>Pizzeria</li>
+                    </ul>
+                </section>
 
-            <section class="day">
-                <h2>📅 Mardi 4 août</h2>
-                <img src="https://media-cdn.tripadvisor.com/media/photo-s/10/b0/0f/14/superdevoluy-en-ete.jpg" alt="Superdévoluy en été" class="day-img">
-                <ul id="list-mardi"><li>Chargement...</li></ul>
-            </section>
+                <section class="day">
+                    <h2>📅 Jeudi 6 août</h2>
+                    <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRcHnJlfNFe-MK1wed5LmPpuUDFON79efy2Ag&s" alt="Les Gillardes" class="day-img">
+                    <ul>
+                        <li>Gillardes</li>
+                        <li>Pique-nique</li>
+                        <li>Randonnée</li>
+                        <li>Apéro en haut du Jas</li>
+                    </ul>
+                </section>
 
-            <section class="day">
-                <h2>📅 Mercredi 5 août</h2>
-                <img src="https://static.alpes-isere.com/wp-content/uploads/2024/08/vue-aerienne-du-lac-du-sautet-en-matheysine-alexandre-gelin-895x435.jpg" alt="Vue aérienne du Lac du Sautet" class="day-img">
-                <ul id="list-mercredi"><li>Chargement...</li></ul>
-            </section>
+                <section class="day">
+                    <h2>📅 Vendredi 7 août</h2>
+                    <img src="https://www.carnetsderando.net/wp-content/uploads/2021/04/P1100102.jpg" alt="Grande randonnée dans le Dévoluy" class="day-img">
+                    <ul>
+                        <li>Grande randonnée</li>
+                        <li>15–20 km</li>
+                        <li>6–7 h de marche avec pique-nique</li>
+                        <li>Pause glace</li>
+                    </ul>
+                </section>
 
-            <section class="day">
-                <h2>📅 Jeudi 6 août</h2>
-                <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRcHnJlfNFe-MK1wed5LmPpuUDFON79efy2Ag&s" alt="Les Gillardes" class="day-img">
-                <ul id="list-jeudi"><li>Chargement...</li></ul>
-            </section>
+                <section class="day">
+                    <h2>📅 Samedi 8 août</h2>
+                    <img src="https://img2.oastatic.com/img2/80821033/max/variant.jpg" alt="Activité accrobranche" class="day-img">
+                    <ul>
+                        <li>Rangement du studio</li>
+                        <li>Accrobranche</li>
+                        <li>Pique-nique</li>
+                        <li>Dernière promenade</li>
+                        <li>Retour (départ vers 15 h)</li>
+                    </ul>
+                </section>
+            </div>
 
-            <section class="day">
-                <h2>📅 Vendredi 7 août</h2>
-                <img src="https://www.carnetsderando.net/wp-content/uploads/2021/04/P1100102.jpg" alt="Grande randonnée dans le Dévoluy" class="day-img">
-                <ul id="list-vendredi"><li>Chargement...</li></ul>
-            </section>
+            <div id="infos" class="tab-panel">
+                <section class="day">
+                    <h2>📍 Infos lieux importants</h2>
+                    <div style="margin-bottom:20px;padding:15px;background:#eef2f7;border-radius:10px;border-left:5px solid #2c7be5;">
+                        <strong>🚗 Itinéraire principal :</strong><br>
+                        <a href="https://maps.app.goo.gl/MEU63tAS28P1jTsz8" target="_blank" rel="noopener noreferrer">Ouvrir l'itinéraire Google Maps</a>
+                    </div>
+                    <ul>
+                        <li>Station Superdévoluy</li>
+                        <li>Studio : 450S, porte Obiou – Bois d'Aurouze</li>
+                        <li>Lac du Sautet</li>
+                        <li>Pizzeria</li>
+                        <li>Accrobranche</li>
+                    </ul>
+                </section>
 
-            <section class="day">
-                <h2>📅 Samedi 8 août</h2>
-                <img src="https://img2.oastatic.com/img2/80821033/max/variant.jpg" alt="Activité accrobranche" class="day-img">
-                <ul id="list-samedi"><li>Chargement...</li></ul>
-            </section>
+                <section class="day">
+                    <h2>📄 Documents du séjour</h2>
+                    <p style="margin-bottom: 15px; color: #555;">Voici les raccourcis vers les documents partagés pour chaque participant.</p>
+                    <ul class="docx-list">
+                        <li><a class="docx-link" href="Élise.docx" download><span>Élise.docx</span><span>📄</span></a></li>
+                        <li><a class="docx-link" href="Titouan.docx" download><span>Titouan.docx</span><span>📄</span></a></li>
+                        <li><a class="docx-link" href="Jocelyne.docx" download><span>Jocelyne.docx</span><span>📄</span></a></li>
+                        <li><a class="docx-link" href="Julien.docx" download><span>Julien.docx</span><span>📄</span></a></li>
+                        <li><a class="docx-link" href="Élouan.docx" download><span>Élouan.docx</span><span>📄</span></a></li>
+                    </ul>
+                </section>
+            </div>
 
-            <button id="btn-edit-mode" class="btn-action btn-edit-trigger">✏️ Modifier le Programme Général</button>
+            <div id="depenses" class="tab-panel">
+                <section class="day">
+                    <h2>💰 Dépenses</h2>
+                    <p>La gestion des dépenses est maintenant résumée ici pour le groupe. Les montants peuvent être mis à jour à la main selon les dépenses partagées.</p>
+                    <ul style="margin-top: 15px;">
+                        <li>Repas du groupe : à prévoir</li>
+                        <li>Courses communes : à prévoir</li>
+                        <li>Transports : à prévoir</li>
+                    </ul>
+                </section>
+            </div>
 
-            <div id="edit-section" class="edit-container" style="display: none; margin-bottom: 25px;">
-                <h3 style="margin-bottom: 10px;">Modifier les activités du séjour</h3>
-                <p style="font-size: 0.85rem; color: #666; margin-bottom: 10px;">Sépare chaque activité par un retour à la ligne pour recréer la liste à puces automatiquement.</p>
-                <h4 id="edit-day-label">Mardi 4 août</h4>
-                <textarea id="edit-day-text" class="edit-textarea"></textarea>
-                <button id="btn-save-prog" class="btn-action btn-save">Enregistrer</button>
-                <button id="btn-cancel-prog" class="btn-action btn-cancel">Annuler</button>
+            <div id="photos" class="tab-panel">
+                <section class="day" id="photos-section">
+                    <h2>📸 Album Photos du Séjour</h2>
+                    <p style="margin-bottom: 20px; color: #555;">
+                        Pour éviter d'inonder le groupe Snap et centraliser tous nos plus belles photos (paysages, rando), on utilise un album collaboratif.
+                    </p>
+                    <div style="text-align: center; margin-top: 10px; margin-bottom: 25px;">
+                        <a href="https://photos.app.goo.gl/VKkHFQmbvXgQoSFh6" target="_blank" style="display: inline-block; padding: 15px 30px; background: linear-gradient(135deg, #4285F4, #EA4335, #FBBC05, #34A853); color: white; border-radius: 30px; font-weight: bold; font-size: 1.1rem; box-shadow: 0 4px 15px rgba(0,0,0,0.15); transition: transform 0.2s; text-decoration: none;">
+                            🚀 Rejoindre l'Album Partagé
+                        </a>
+                    </div>
+                </section>
+            </div>
+
+            <div id="contacts" class="tab-panel">
+                <section class="day">
+                    <h2>📞 Contacts</h2>
+                    <ul>
+                        <li><strong>Élise</strong> : 07 67 45 58 41</li>
+                        <li><strong>Parents d'Élise</strong> : 06 14 11 36 74 (belle mère)</li>
+                        <br>
+                        <li><strong>Titouan</strong> : 06 36 05 81 66</li>
+                        <li><strong>Parents de Titouan</strong> : 06 21 08 50 39 (mère), 07 71 26 06 52 (père)</li>
+                        <br>
+                        <li><strong>Jocelyne</strong> : 06 12 39 39 17</li>
+                        <li><strong>Parents de Jocelyne</strong> : 06 98 41 37 11 (mère), 06 60 07 59 93 (père)</li>
+                        <br>
+                        <li><strong>Julien</strong> : 07 49 06 05 05</li>
+                        <li><strong>Parents de Julien</strong> : 06 75 04 67 54 (mère)</li>
+                        <br>
+                        <li><strong>Élouan</strong> : 06 02 45 65 69</li>
+                        <li><strong>Parents d'Élouan</strong> : 07 61 83 15 98 (mère)</li>
+                    </ul>
+                </section>
+            </div>
+
+            <div id="infos-medicales" class="tab-panel">
+                <section class="day">
+                    <h2>🏥 Infos médicales</h2>
+                    <ul>
+                        <li><strong>Élise</strong> : Allergies accariens, pollen et morphine</li>
+                        <br>
+                        <li><strong>Titouan</strong> : Allergies accariens et pollen</li>
+                        <br>
+                        <li><strong>Jocelyne</strong> : Allergies armoise et pénicilline</li>
+                        <br>
+                        <li><strong>Julien</strong> : Allergie accariens</li>
+                        <br>
+                        <li><strong>Élouan</strong> : Allergies céleri, soja</li>
+                    </ul>
+                </section>
             </div>
         </div>
 
-        <!-- ===== INFOS & MATOS ===== -->
-        <div id="infos" class="tab-panel">
-
-            <!-- Lieux importants -->
-            <section class="day">
-                <h2>📍 Infos lieux importants</h2>
-                <div style="margin-bottom:20px;padding:15px;background:#eef2f7;border-radius:10px;border-left:5px solid #2c7be5;">
-                    <strong>🚗 Itinéraire principal :</strong><br>
-                    <a href="https://maps.app.goo.gl/MEU63tAS28P1jTsz8" target="_blank" rel="noopener noreferrer">Ouvrir l'itinéraire Google Maps</a>
-                </div>
-                <ul id="list-lieux"><li>Chargement...</li></ul>
-            </section>
-
-            <!-- Équipement & affaires -->
-            <section class="day">
-                <h2>🎒 Équipement & affaires à prendre</h2>
-
-                <div class="section-header">
-                    <h3>👕 Divers</h3>
-                    <button class="btn-edit-section" onclick="toggleInlineEdit('divers')">✏️ Modifier</button>
-                </div>
-                <div class="inline-edit-box" id="edit-box-divers">
-                    <p class="hint">Une ligne = un élément de la liste.</p>
-                    <textarea id="textarea-divers"></textarea>
-                    <button class="btn-action btn-save" onclick="saveMatosSection('divers')">💾 Enregistrer</button>
-                    <button class="btn-action btn-cancel" onclick="toggleInlineEdit('divers')">Annuler</button>
-                </div>
-                <ul id="list-divers"><li>Chargement...</li></ul>
-
-                <div class="section-header">
-                    <h3>👕 Vêtements</h3>
-                    <button class="btn-edit-section" onclick="toggleInlineEdit('vetements')">✏️ Modifier</button>
-                </div>
-                <div class="inline-edit-box" id="edit-box-vetements">
-                    <p class="hint">Une ligne = un élément de la liste.</p>
-                    <textarea id="textarea-vetements"></textarea>
-                    <button class="btn-action btn-save" onclick="saveMatosSection('vetements')">💾 Enregistrer</button>
-                    <button class="btn-action btn-cancel" onclick="toggleInlineEdit('vetements')">Annuler</button>
-                </div>
-                <ul id="list-vetements"><li>Chargement...</li></ul>
-
-                <div class="section-header">
-                    <h3>🧭 Matériel</h3>
-                    <button class="btn-edit-section" onclick="toggleInlineEdit('materiel')">✏️ Modifier</button>
-                </div>
-                <div class="inline-edit-box" id="edit-box-materiel">
-                    <p class="hint">Une ligne = un élément de la liste.</p>
-                    <textarea id="textarea-materiel"></textarea>
-                    <button class="btn-action btn-save" onclick="saveMatosSection('materiel')">💾 Enregistrer</button>
-                    <button class="btn-action btn-cancel" onclick="toggleInlineEdit('materiel')">Annuler</button>
-                </div>
-                <ul id="list-materiel"><li>Chargement...</li></ul>
-
-                <div class="section-header">
-                    <h3>🍞 Nourriture</h3>
-                    <button class="btn-edit-section" onclick="toggleInlineEdit('nourriture')">✏️ Modifier</button>
-                </div>
-                <div class="inline-edit-box" id="edit-box-nourriture">
-                    <p class="hint">Une ligne = un élément de la liste.</p>
-                    <textarea id="textarea-nourriture"></textarea>
-                    <button class="btn-action btn-save" onclick="saveMatosSection('nourriture')">💾 Enregistrer</button>
-                    <button class="btn-action btn-cancel" onclick="toggleInlineEdit('nourriture')">Annuler</button>
-                </div>
-                <ul id="list-nourriture"><li>Chargement...</li></ul>
-
-                <div class="section-header">
-                    <h3>📱 Électronique</h3>
-                    <button class="btn-edit-section" onclick="toggleInlineEdit('electronique')">✏️ Modifier</button>
-                </div>
-                <div class="inline-edit-box" id="edit-box-electronique">
-                    <p class="hint">Une ligne = un élément de la liste.</p>
-                    <textarea id="textarea-electronique"></textarea>
-                    <button class="btn-action btn-save" onclick="saveMatosSection('electronique')">💾 Enregistrer</button>
-                    <button class="btn-action btn-cancel" onclick="toggleInlineEdit('electronique')">Annuler</button>
-                </div>
-                <ul id="list-electronique"><li>Chargement...</li></ul>
-
-                <div class="section-header">
-                    <h3>🛡️ Santé</h3>
-                    <button class="btn-edit-section" onclick="toggleInlineEdit('sante')">✏️ Modifier</button>
-                </div>
-                <div class="inline-edit-box" id="edit-box-sante">
-                    <p class="hint">Une ligne = un élément de la liste.</p>
-                    <textarea id="textarea-sante"></textarea>
-                    <button class="btn-action btn-save" onclick="saveMatosSection('sante')">💾 Enregistrer</button>
-                    <button class="btn-action btn-cancel" onclick="toggleInlineEdit('sante')">Annuler</button>
-                </div>
-                <ul id="list-sante"><li>Chargement...</li></ul>
-
-                <div class="section-header">
-                    <h3>🪪 Documents</h3>
-                    <button class="btn-edit-section" onclick="toggleInlineEdit('documents')">✏️ Modifier</button>
-                </div>
-                <div class="inline-edit-box" id="edit-box-documents">
-                    <p class="hint">Une ligne = un élément de la liste.</p>
-                    <textarea id="textarea-documents"></textarea>
-                    <button class="btn-action btn-save" onclick="saveMatosSection('documents')">💾 Enregistrer</button>
-                    <button class="btn-action btn-cancel" onclick="toggleInlineEdit('documents')">Annuler</button>
-                </div>
-                <ul id="list-documents"><li>Chargement...</li></ul>
-
-            </section>
-        </div>
-
-        <!-- ===== DÉPENSES ===== -->
-        <div id="depenses" class="tab-panel">
-            <section class="day" id="depenses-section">
-                <h2>💰 Gestion des Dépenses</h2>
-                
-                <form id="expense-form" style="margin-bottom: 25px;">
-                    <div style="display: flex; gap: 10px; flex-wrap: wrap;">
-                        <select id="expense-payer" required style="padding: 10px; border-radius: 8px; border: 1px solid #ccc; flex: 1; min-width: 140px;">
-                            <option value="">Qui a payé ?</option>
-                            <option value="Élise">Élise</option>
-                            <option value="Titouan">Titouan</option>
-                            <option value="Jocelyne">Jocelyne</option>
-                            <option value="Julien">Julien</option>
-                            <option value="Élouan">Élouan</option>
-                        </select>
-                        <input type="text" id="expense-title" placeholder="Description (ex: Pizzeria, Courses...)" required style="padding: 10px; border-radius: 8px; border: 1px solid #ccc; flex: 2; min-width: 200px;">
-                        <input type="number" id="expense-amount" step="0.01" min="0" placeholder="Montant (€)" required style="padding: 10px; border-radius: 8px; border: 1px solid #ccc; flex: 1; min-width: 100px;">
-                        <button type="submit" style="padding: 10px 20px; background: #2c7be5; color: white; border: none; border-radius: 8px; cursor: pointer; font-weight: bold;">Ajouter</button>
-                    </div>
-                </form>
-
-                <h3>📊 Résumé financier</h3>
-                <div id="expense-summary" style="background: #eef2f7; padding: 20px; border-radius: 10px; margin-bottom: 25px; border-left: 5px solid #2c7be5;">
-                    <p style="margin-bottom: 5px;"><strong>Total dépensé par le groupe :</strong> <span id="total-amount" style="font-size: 1.2rem; color: #2c7be5; font-weight: bold;">0.00</span> €</p>
-                    <p style="margin-bottom: 15px;"><strong>Part par personne (6 participants) :</strong> <span id="per-person-amount" style="font-weight: bold;">0.00</span> €</p>
-                    <div id="individual-balances" style="margin-top: 10px; border-top: 1px solid #ddd; padding-top: 10px;"></div>
-                </div>
-
-                <h3>📜 Historique des paiements</h3>
-                <ul id="expenses-list" style="list-style: none; padding-left: 0; margin-top: 10px;"></ul>
-            </section>
-        </div>
-
-        <!-- ===== PHOTOS ===== -->
-        <div id="photos" class="tab-panel">
-            <section class="day" id="photos-section">
-                <h2>📸 Album Photos du Séjour</h2>
-                <p style="margin-bottom: 20px; color: #555;">
-                    Pour éviter d'inonder le groupe Snap et centraliser tous nos plus belles photos (paysages, rando), on utilise un album collaboratif. Tout le monde peut y jeter un œil et y ajouter ses propres photos !
-                </p>
-                <div style="text-align: center; margin-top: 10px; margin-bottom: 25px;">
-                    <a href="https://photos.app.goo.gl/VKkHFQmbvXgQoSFh6" target="_blank" style="display: inline-block; padding: 15px 30px; background: linear-gradient(135deg, #4285F4, #EA4335, #FBBC05, #34A853); color: white; border-radius: 30px; font-weight: bold; font-size: 1.1rem; box-shadow: 0 4px 15px rgba(0,0,0,0.15); transition: transform 0.2s; text-decoration: none;">
-                        🚀 Rejoindre l'Album Partagé
-                    </a>
-                </div>
-                <div style="background: #eef2f7; padding: 15px; border-radius: 10px; border-left: 5px solid #00b4d8; font-size: 0.95rem;">
-                    📌 <strong>Mode d'emploi :</strong>
-                    <ul style="margin-top: 5px; padding-left: 20px; list-style-type: disc;">
-                        <li>Clique sur le bouton ci-dessus pour ouvrir l'album.</li>
-                        <li>Clique sur l'icône <strong>"Rejoindre"</strong>.</li>
-                        <li>Tu peux maintenant ajouter tes photos directement depuis la galerie de ton téléphone pendant ou après le séjour !</li>
-                    </ul>
-                </div>
-            </section>
-        </div>
-
-        <!-- ===== CONTACTS ===== -->
-        <div id="contacts" class="tab-panel">
-            <section class="day">
-                <h2>📞 Contacts</h2>
-                <ul>
-                    <li><strong>Élise</strong> : 07 67 45 58 41</li>
-                    <li><strong>Parents d'Élise</strong> : 06 14 11 36 74 (belle mère)</li>
-                    <br>
-                    <li><strong>Titouan</strong> : 06 36 05 81 66</li>
-                    <li><strong>Parents de Titouan</strong> : 06 21 08 50 39 (mère), 07 71 26 06 52 (père)</li>
-                    <br>
-
-                    <li><strong>Jocelyne</strong> : 06 12 39 39 17</li>
-                    <li><strong>Parents de Jocelyne</strong> : 06 98 41 37 11 (mère), 06 60 07 59 93 (père)</li>
-                    <br>
-                    <li><strong>Julien</strong> : 07 49 06 05 05</li>
-                    <li><strong>Parents de Julien</strong> : 06 75 04 67 54 (mère)</li>
-                    <br>
-                    <li><strong>Élouan</strong> : 06 02 45 65 69</li>
-                    <li><strong>Parents d'Élouan</strong> : 07 61 83 15 98 (mère)</li>
-                </ul>
-            </section>
-        </div>
-
-        <!-- ===== INFOS MÉDICALES ===== -->
-        <div id="infos-medicales" class="tab-panel">
-            <section class="day">
-                <h2>🏥 Infos médicales</h2>
-                <ul>
-                    <li><strong>Élise</strong> : Allergies accariens, pollen et morphine</li>
-                    <br>
-                    <li><strong>Titouan</strong> : Allergies accariens et pollen</li>
-                    <br>
-                    <li><strong>Jocelyne</strong> : Allergies armoise et penniciline</li>
-                    <br>
-                    <li><strong>Julien</strong> : Allergie accariens</li>
-                    <br>
-                    <li><strong>Élouan</strong> : Allergies céleri, soja</li>
-                </ul>
-            </section>
-        </div>
-
+        <footer>🏔️ Superdévoluy • Séjour organisé</footer>
     </div>
-
-    <footer>
-        🏔️ Superdévoluy • Séjour organisé
-    </footer>
 
     <script>
         function switchTab(tabId, buttonEl) {
@@ -547,242 +550,52 @@
             document.getElementById(tabId).classList.add('active');
         }
 
-        // Ouvre/ferme une boîte d'édition inline et pré-remplit le textarea
-        function toggleInlineEdit(section) {
-            const box = document.getElementById('edit-box-' + section);
-            const textarea = document.getElementById('textarea-' + section);
-            const isOpen = box.style.display === 'block';
+        window.switchTab = switchTab;
 
-            if (!isOpen) {
-                // Récupère le texte actuel de la liste pour pré-remplir
-                const ul = document.getElementById('list-' + section);
-                const items = Array.from(ul.querySelectorAll('li')).map(li => li.textContent.trim());
-                textarea.value = items.join('\n');
-                box.style.display = 'block';
-                textarea.focus();
-            } else {
-                box.style.display = 'none';
-            }
-        }
-    </script>
+        const passwordForm = document.getElementById('password-form');
+        const passwordInput = document.getElementById('password-input');
+        const passwordError = document.getElementById('password-error');
+        const passwordScreen = document.getElementById('password-screen');
+        const appContent = document.getElementById('app-content');
+        const STORAGE_KEY = 'vacances-access';
+        const CORRECT_PASSWORD = 'hsd2026';
 
-    <script type="module">
-        import { initializeApp } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-app.js";
-        import { getDatabase, ref, onValue, set } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-database.js";
-        import { getAnalytics } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-analytics.js";
-        import { push, remove } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-database.js";
-
-        const firebaseConfig = {
-            apiKey: "AIzaSyBlh3Re0vovY7iGA-AnNJUN2MVMB9msNdk",
-            authDomain: "vacances-superdevoluy.firebaseapp.com",
-            projectId: "vacances-superdevoluy",
-            storageBucket: "vacances-superdevoluy.firebasestorage.app",
-            messagingSenderId: "164197720279",
-            appId: "1:164197720279:web:8f2c41261bf95c9423d092",
-            measurementId: "G-RDJQ1Y2943",
-            databaseURL: "https://vacances-superdevoluy-default-rtdb.europe-west1.firebasedatabase.app"
-        };
-
-        const app = initializeApp(firebaseConfig);
-        const db = getDatabase(app);
-        const analytics = getAnalytics(app);
-
-        const participants = ["Élise", "Titouan", "Jocelyne", "Julien", "Élouan"];
-
-        // =====================================================
-        // PROGRAMME
-        // =====================================================
-        const programRef = ref(db, "programmeTexts");
-        let currentProgramData = {
-            mardi: "Rendez-vous à midi à Superdévoluy\nPique-nique\nInstallation au studio\nTour du Puy (4 km)\nPromenade dans la station\nRepas du soir (ratatouille)",
-            mercredi: "Lac du Sautet\nPique-nique\nRandonnée (canal de Pellafol)\nPizzeria",
-            jeudi: "Gillardes\nPique-nique\nRandonnée\nApéro en haut du Jas",
-            vendredi: "Grande randonnée\n15–20 km\n6-7 h de marche avec pique-nique\nPause glace",
-            samedi: "Rangement du studio\nAccrobranche\nPique-nique\nDernière promenade\nRetour (départ vers 15h)"
-        };
-
-        const daysKeys = ['mardi', 'mercredi', 'jeudi', 'vendredi', 'samedi'];
-        let currentEditingDayIndex = 0;
-
-        const editSection = document.getElementById('edit-section');
-        const editDayLabel = document.getElementById('edit-day-label');
-        const editDayText = document.getElementById('edit-day-text');
-        const btnEditMode = document.getElementById('btn-edit-mode');
-        const btnSaveProg = document.getElementById('btn-save-prog');
-        const btnCancelProg = document.getElementById('btn-cancel-prog');
-
-        function generateListHTML(text) {
-            if (!text) return "<li>Rien de prévu pour le moment !</li>";
-            return text.split('\n').filter(l => l.trim()).map(l => `<li>${l.trim()}</li>`).join('');
+        function revealApp() {
+            passwordScreen.classList.add('app-hidden');
+            appContent.classList.remove('app-hidden');
         }
 
-        onValue(programRef, (snapshot) => {
-            if (snapshot.exists()) {
-                currentProgramData = snapshot.val();
-            } else {
-                set(programRef, currentProgramData);
-            }
-            daysKeys.forEach(day => {
-                const el = document.getElementById(`list-${day}`);
-                if (el) el.innerHTML = generateListHTML(currentProgramData[day]);
-            });
-        });
-
-        btnEditMode.addEventListener('click', () => { currentEditingDayIndex = 0; openEditDay(); });
-
-        function openEditDay() {
-            const key = daysKeys[currentEditingDayIndex];
-            editDayLabel.textContent = `Jour ${currentEditingDayIndex + 1}/${daysKeys.length} : Journée du ${key.charAt(0).toUpperCase() + key.slice(1)}`;
-            editDayText.value = currentProgramData[key] || "";
-            editSection.style.display = 'block';
-            btnEditMode.style.display = 'none';
-            editSection.scrollIntoView({ behavior: 'smooth' });
+        function showPasswordPrompt() {
+            passwordScreen.classList.remove('app-hidden');
+            appContent.classList.add('app-hidden');
+            passwordInput.focus();
         }
 
-        btnSaveProg.addEventListener('click', async () => {
-            const key = daysKeys[currentEditingDayIndex];
-            currentProgramData[key] = editDayText.value;
-            if (currentEditingDayIndex < daysKeys.length - 1) {
-                currentEditingDayIndex++;
-                openEditDay();
+        if (localStorage.getItem(STORAGE_KEY) === CORRECT_PASSWORD) {
+            revealApp();
+        } else {
+            showPasswordPrompt();
+        }
+
+        passwordForm.addEventListener('submit', (event) => {
+            event.preventDefault();
+            if (passwordInput.value === CORRECT_PASSWORD) {
+                localStorage.setItem(STORAGE_KEY, CORRECT_PASSWORD);
+                revealApp();
             } else {
-                try {
-                    await set(programRef, currentProgramData);
-                    closeEditMode();
-                } catch (e) { alert("Erreur : " + e.message); }
+                passwordError.textContent = 'Mot de passe incorrect.';
+                passwordInput.value = '';
+                passwordInput.focus();
             }
         });
 
-        btnCancelProg.addEventListener('click', closeEditMode);
-
-        function closeEditMode() {
-            editSection.style.display = 'none';
-            btnEditMode.style.display = 'block';
-        }
-
-        // =====================================================
-        // INFOS & MATOS — données par défaut
-        // =====================================================
-        const defaultMatosData = {
-            lieux: "Station Superdévoluy : https://maps.google.com\nStudio : 450S, porte Obiou – Bois d'Aurouze\nLac du Sautet : https://maps.google.com\nPizzeria : https://maps.google.com\nAccrobranche : https://maps.google.com",
-            divers: "Repas Mardi soir\nSac poubelle\nPapier hygiénique\nMouchoirs\nSopalin\nTorchons vaisselle\nLingettes",
-            vetements: "Drapes / sac de couchage / taie d'oreiller\nMatelas une place\n5 tenues de sport\nChaussures de randonnée / sport\nPolaire / pull\nCoupe-vent / k-way\nCasquette\nLunettes de soleil\nMaillot de bain + serviette\nGants (via ferrata / accrobranche)",
-            materiel: "Sac à dos\nSac à linge sale\nSac plastique maillot de bain\nSac isotherme (si possible)\nGourde\nBoules de pétanque\nBallon de foot\nSkate/rollers\nPoche téléphone étanche\nBâtons de marche",
-            nourriture: "Petit-déjeuners\nPique-nique jeudi midi",
-            electronique: "Câble de recharge",
-            sante: "Crème solaire\nAprès soleil\nMédicaments pour la route\nAntihistaminique",
-            documents: "CNI ou passeport\nCB\nEspèces\nPermis de conduire et assurances\nCarte Vitale (si vous avez)"
-        };
-
-        const matosSections = ['lieux', 'divers', 'vetements', 'materiel', 'nourriture', 'electronique', 'sante', 'documents'];
-        const matosRef = ref(db, "matosData");
-        let currentMatosData = { ...defaultMatosData };
-
-        // Rendu d'une section matos
-        function renderMatosSection(key, text) {
-            const ul = document.getElementById('list-' + key);
-            if (!ul) return;
-            if (!text) { ul.innerHTML = "<li>Rien pour le moment.</li>"; return; }
-            ul.innerHTML = text.split('\n').filter(l => l.trim()).map(l => {
-                const urlRegex = /(https?:\/\/[^\s]+)/g;
-                const linked = l.trim().replace(urlRegex, '<a href="$1" target="_blank">Maps</a>');
-                // Si la ligne contient une URL brute (pas de texte avant), afficher seulement le lien
-                return `<li>${linked}</li>`;
-            }).join('');
-        }
-
-        onValue(matosRef, (snapshot) => {
-            if (snapshot.exists()) {
-                currentMatosData = snapshot.val();
-            } else {
-                set(matosRef, defaultMatosData);
-            }
-            matosSections.forEach(key => renderMatosSection(key, currentMatosData[key]));
-        });
-
-        // Exposer saveMatosSection globalement pour les boutons inline
-        window.saveMatosSection = async function(section) {
-            const textarea = document.getElementById('textarea-' + section);
-            currentMatosData[section] = textarea.value;
-            try {
-                await set(matosRef, currentMatosData);
-                // Ferme la boîte après sauvegarde
-                document.getElementById('edit-box-' + section).style.display = 'none';
-            } catch (e) {
-                alert("Erreur de sauvegarde : " + e.message);
-            }
-        };
-
-        // =====================================================
-        // DÉPENSES
-        // =====================================================
-        const expenseForm = document.getElementById('expense-form');
-        const expensesList = document.getElementById('expenses-list');
-        const totalAmountEl = document.getElementById('total-amount');
-        const perPersonAmountEl = document.getElementById('per-person-amount');
-        const individualBalancesEl = document.getElementById('individual-balances');
-        const expensesRef = ref(db, "expenses");
-
-        onValue(expensesRef, (snapshot) => {
-            let totalGroup = 0;
-            let paidByEach = {};
-            participants.forEach(p => paidByEach[p] = 0);
-            expensesList.innerHTML = "";
-
-            if (snapshot.exists()) {
-                snapshot.forEach((childSnapshot) => {
-                    const id = childSnapshot.key;
-                    const expense = childSnapshot.val();
-                    totalGroup += expense.amount;
-                    if (paidByEach[expense.payer] !== undefined) paidByEach[expense.payer] += expense.amount;
-
-                    const li = document.createElement('li');
-                    li.style.cssText = 'background:#fff;padding:12px;margin-bottom:8px;border-radius:8px;box-shadow:0 2px 5px rgba(0,0,0,0.05);display:flex;justify-content:space-between;align-items:center;';
-                    li.innerHTML = `<span><strong>${expense.payer}</strong> a payé <span style="color:#2c7be5;font-weight:bold;">${expense.amount.toFixed(2)}€</span> pour <em>${expense.title}</em></span>
-                        <button data-id="${id}" class="btn-delete" style="background:none;border:none;color:#dc3545;cursor:pointer;font-weight:bold;font-size:1.1rem;padding:0 5px;">✕</button>`;
-                    expensesList.insertBefore(li, expensesList.firstChild);
+        if ('serviceWorker' in navigator) {
+            window.addEventListener('load', () => {
+                navigator.serviceWorker.register('./sw.js').catch((error) => {
+                    console.warn('Service worker non enregistré', error);
                 });
-            }
-
-            const perPersonShare = totalGroup / participants.length;
-            totalAmountEl.textContent = totalGroup.toFixed(2);
-            perPersonAmountEl.textContent = perPersonShare.toFixed(2);
-
-            individualBalancesEl.innerHTML = '<h4 style="margin-bottom:10px;color:#444;">Soldes individuels :</h4>';
-            participants.forEach(p => {
-                const balance = paidByEach[p] - perPersonShare;
-                const pEl = document.createElement('p');
-                pEl.style.cssText = 'margin-bottom:4px;font-size:0.95rem;';
-                if (balance > 0) pEl.innerHTML = `➡️ <strong>${p}</strong> a payé ${paidByEach[p].toFixed(2)}€ : <span style="color:#28a745;font-weight:bold;">+${balance.toFixed(2)} €</span> (doit recevoir)`;
-                else if (balance < 0) pEl.innerHTML = `⬅️ <strong>${p}</strong> a payé ${paidByEach[p].toFixed(2)}€ : <span style="color:#dc3545;font-weight:bold;">${balance.toFixed(2)} €</span> (doit donner)`;
-                else pEl.innerHTML = `✅ <strong>${p}</strong> a payé ${paidByEach[p].toFixed(2)}€ : <span style="color:#6c757d;">0.00 €</span> (à jour)`;
-                individualBalancesEl.appendChild(pEl);
             });
-        });
-
-        expenseForm.addEventListener('submit', async (e) => {
-            e.preventDefault();
-            const payer = document.getElementById('expense-payer').value;
-            const title = document.getElementById('expense-title').value;
-            const amount = parseFloat(document.getElementById('expense-amount').value);
-            if (payer && title && !isNaN(amount)) {
-                try {
-                    await push(expensesRef, { payer, title, amount, createdAt: Date.now() });
-                    expenseForm.reset();
-                } catch (e) { alert("Erreur Firebase : " + e.message); }
-            }
-        });
-
-        document.getElementById('expenses-list').addEventListener('click', async (e) => {
-            if (e.target.classList.contains('btn-delete')) {
-                const id = e.target.getAttribute('data-id');
-                if (confirm("Supprimer cette dépense ?")) {
-                    try {
-                        await remove(ref(db, `expenses/${id}`));
-                    } catch (e) { alert("Erreur : " + e.message); }
-                }
-            }
-        });
+        }
     </script>
 </body>
 </html>
