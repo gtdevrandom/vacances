@@ -342,6 +342,40 @@
             font-size: 0.95rem;
         }
 
+        .list-preview-block {
+            margin-bottom: 10px;
+        }
+
+        .list-preview-label {
+            font-size: 0.78rem;
+            font-weight: bold;
+            color: #7a8aa0;
+            text-transform: uppercase;
+            letter-spacing: 0.04em;
+            margin-bottom: 6px;
+        }
+
+        .list-preview {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+        }
+
+        .preview-pill {
+            display: inline-block;
+            padding: 6px 10px;
+            border-radius: 999px;
+            background: #eef2f7;
+            color: #2c7be5;
+            font-size: 0.9rem;
+            line-height: 1.2;
+        }
+
+        .preview-empty {
+            color: #7a8aa0;
+            font-size: 0.9rem;
+        }
+
         @media (max-width: 700px) {
             header h1 {
                 font-size: 2rem;
@@ -393,14 +427,14 @@
                         <li>Pique-nique</li>
                         <li>Installation au studio</li>
                         <li>Tour du Puy (4 km)</li>
-                        <li>Promenade dans la station</li>
+                        <li>Apéro en haut du Puy</li>
                         <li>Repas du soir (ratatouille)</li>
                     </ul>
                 </section>
 
                 <section class="day">
                     <h2>📅 Mercredi 5 août</h2>
-                    <img src="https://static.alpes-isere.com/wp-content/uploads/2024/08/vue-aerienne-du-lac-du-sautet-en-matheysine-alexandre-gelin-895x435.jpg" alt="Vue aérienne du Lac du Sautet" class="day-img">
+                    <img src="https://www.ecovoyageurs.com/images/articles/lac_du_sautet1.jpg" alt="Vue aérienne du Lac du Sautet" class="day-img">
                     <ul>
                         <li>Lac du Sautet</li>
                         <li>Pique-nique</li>
@@ -416,7 +450,7 @@
                         <li>Gillardes</li>
                         <li>Pique-nique</li>
                         <li>Randonnée</li>
-                        <li>Apéro en haut du Jas</li>
+                        <li>Glace chez Marguerie</li>
                     </ul>
                 </section>
 
@@ -588,6 +622,46 @@
                 passwordInput.focus();
             }
         });
+
+        function escapeHtml(value) {
+            return String(value)
+                .replace(/&/g, '&amp;')
+                .replace(/</g, '&lt;')
+                .replace(/>/g, '&gt;')
+                .replace(/"/g, '&quot;')
+                .replace(/'/g, '&#39;');
+        }
+
+        function renderListPreviews() {
+            document.querySelectorAll('.day ul').forEach((ul) => {
+                if (ul.previousElementSibling && ul.previousElementSibling.classList.contains('list-preview-block')) {
+                    return;
+                }
+
+                const wrapper = document.createElement('div');
+                wrapper.className = 'list-preview-block';
+                wrapper.innerHTML = '<div class="list-preview-label">Aperçu</div><div class="list-preview"></div>';
+                const preview = wrapper.querySelector('.list-preview');
+
+                const items = Array.from(ul.querySelectorAll('li'))
+                    .map((li) => li.textContent.trim())
+                    .filter(Boolean);
+
+                if (items.length === 0) {
+                    preview.innerHTML = '<span class="preview-empty">Aucun élément</span>';
+                } else {
+                    const visibleItems = items.slice(0, 4);
+                    preview.innerHTML = visibleItems.map((item) => `<span class="preview-pill">${escapeHtml(item)}</span>`).join('');
+                    if (items.length > visibleItems.length) {
+                        preview.innerHTML += `<span class="preview-pill">+${items.length - visibleItems.length}</span>`;
+                    }
+                }
+
+                ul.before(wrapper);
+            });
+        }
+
+        renderListPreviews();
 
         if ('serviceWorker' in navigator) {
             window.addEventListener('load', () => {
