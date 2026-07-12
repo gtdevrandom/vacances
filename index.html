@@ -314,6 +314,20 @@
             display: none !important;
         }
 
+        .docx-search {
+            margin-bottom: 14px;
+        }
+
+        .docx-search input {
+            width: 100%;
+            padding: 12px 14px;
+            border-radius: 10px;
+            border: 1px solid #dfe7f2;
+            background: #f7f9fc;
+            color: #333;
+            font-size: 0.95rem;
+        }
+
         .docx-list {
             list-style: none;
             padding: 0;
@@ -321,59 +335,147 @@
             gap: 12px;
         }
 
-        .docx-link {
+        .docx-card {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 12px;
+            padding: 14px 16px;
+            border-radius: 14px;
+            background: linear-gradient(135deg, #f8fbff, #eef4fb);
+            border: 1px solid #dfe7f2;
+            box-shadow: 0 8px 20px rgba(44, 123, 229, 0.05);
+        }
+
+        .docx-card:hover {
+            transform: translateY(-1px);
+            box-shadow: 0 12px 24px rgba(44, 123, 229, 0.08);
+        }
+
+        .docx-card-main {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            min-width: 0;
+            flex: 1;
+        }
+
+        .docx-icon {
+            width: 42px;
+            height: 42px;
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: linear-gradient(135deg, #2c7be5, #00b4d8);
+            color: white;
+            font-size: 1rem;
+            flex-shrink: 0;
+        }
+
+        .docx-info {
+            min-width: 0;
+        }
+
+        .docx-info a {
+            display: block;
+            color: #1f2f49;
+            font-weight: 700;
+            text-decoration: none;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+        }
+
+        .docx-meta {
+            font-size: 0.8rem;
+            color: #6b7b90;
+            margin-top: 2px;
+        }
+
+        .docx-actions {
+            display: flex;
+            gap: 8px;
+            flex-wrap: wrap;
+            justify-content: flex-end;
+        }
+
+        .docx-btn {
+            border: none;
+            border-radius: 999px;
+            padding: 8px 12px;
+            font-size: 0.8rem;
+            font-weight: 700;
+            cursor: pointer;
+            transition: all 0.2s ease;
+        }
+
+        .docx-btn-preview {
+            background: rgba(44, 123, 229, 0.12);
+            color: #2c7be5;
+        }
+
+        .docx-btn-preview:hover {
+            background: rgba(44, 123, 229, 0.2);
+        }
+
+        .docx-btn-download {
+            background: rgba(0, 180, 216, 0.1);
+            color: #0b7a92;
+        }
+
+        .docx-btn-download:hover {
+            background: rgba(0, 180, 216, 0.2);
+        }
+
+        .docx-preview-panel {
+            display: none;
+            margin-top: 16px;
+            border-radius: 16px;
+            overflow: hidden;
+            border: 1px solid #dfe7f2;
+            box-shadow: 0 12px 28px rgba(0,0,0,0.08);
+        }
+
+        .docx-preview-header {
             display: flex;
             align-items: center;
             justify-content: space-between;
             padding: 12px 14px;
-            border-radius: 10px;
-            background: #eef2f7;
+            background: #f7f9fc;
+            border-bottom: 1px solid #dfe7f2;
+        }
+
+        .docx-preview-title {
+            display: flex;
+            align-items: center;
+            gap: 8px;
             color: #2c7be5;
-            font-weight: 600;
-            text-decoration: none;
-        }
-
-        .docx-link:hover {
-            background: #dfe9f5;
-            text-decoration: none;
-        }
-
-        .docx-link span {
+            font-weight: 700;
             font-size: 0.95rem;
         }
 
-        .list-preview-block {
-            margin-bottom: 10px;
+        .docx-preview-dot {
+            width: 8px;
+            height: 8px;
+            border-radius: 50%;
+            background: #2c7be5;
         }
 
-        .list-preview-label {
-            font-size: 0.78rem;
-            font-weight: bold;
+        .docx-preview-close {
+            border: none;
+            background: transparent;
             color: #7a8aa0;
-            text-transform: uppercase;
-            letter-spacing: 0.04em;
-            margin-bottom: 6px;
-        }
-
-        .list-preview {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 8px;
-        }
-
-        .preview-pill {
-            display: inline-block;
-            padding: 6px 10px;
-            border-radius: 999px;
-            background: #eef2f7;
-            color: #2c7be5;
+            cursor: pointer;
             font-size: 0.9rem;
-            line-height: 1.2;
+            font-weight: 700;
         }
 
-        .preview-empty {
-            color: #7a8aa0;
-            font-size: 0.9rem;
+        iframe {
+            width: 100%;
+            min-height: 70vh;
+            border: none;
+            background: white;
         }
 
         @media (max-width: 700px) {
@@ -496,14 +598,19 @@
 
                 <section class="day">
                     <h2>📄 Documents du séjour</h2>
-                    <p style="margin-bottom: 15px; color: #555;">Voici les raccourcis vers les documents partagés pour chaque participant.</p>
-                    <ul class="docx-list">
-                        <li><a class="docx-link" href="Élise.docx" download><span>Élise.docx</span><span>📄</span></a></li>
-                        <li><a class="docx-link" href="Titouan.docx" download><span>Titouan.docx</span><span>📄</span></a></li>
-                        <li><a class="docx-link" href="Jocelyne.docx" download><span>Jocelyne.docx</span><span>📄</span></a></li>
-                        <li><a class="docx-link" href="Julien.docx" download><span>Julien.docx</span><span>📄</span></a></li>
-                        <li><a class="docx-link" href="Élouan.docx" download><span>Élouan.docx</span><span>📄</span></a></li>
-                    </ul>
+                    <p style="margin-bottom: 15px; color: #555;">Consultez et ouvrez directement les documents partagés pour chaque participant.</p>
+                    <div class="docx-search">
+                        <input id="docx-search" type="text" placeholder="Rechercher un document…" autocomplete="off">
+                    </div>
+                    <ul class="docx-list" id="docx-list"></ul>
+
+                    <div id="docx-preview-panel" class="docx-preview-panel">
+                        <div class="docx-preview-header">
+                            <div class="docx-preview-title"><span class="docx-preview-dot"></span><span id="docx-preview-title">Aperçu</span></div>
+                            <button class="docx-preview-close" id="docx-preview-close" type="button">✕ Fermer</button>
+                        </div>
+                        <iframe id="docx-preview-frame" title="Aperçu du document"></iframe>
+                    </div>
                 </section>
             </div>
 
@@ -623,45 +730,76 @@
             }
         });
 
-        function escapeHtml(value) {
-            return String(value)
-                .replace(/&/g, '&amp;')
-                .replace(/</g, '&lt;')
-                .replace(/>/g, '&gt;')
-                .replace(/"/g, '&quot;')
-                .replace(/'/g, '&#39;');
+        const documents = [
+            { name: 'Élise.docx', emoji: '📄' },
+            { name: 'Titouan.docx', emoji: '📄' },
+            { name: 'Jocelyne.docx', emoji: '📄' },
+            { name: 'Julien.docx', emoji: '📄' },
+            { name: 'Élouan.docx', emoji: '📄' }
+        ];
+
+        const docxList = document.getElementById('docx-list');
+        const docxSearch = document.getElementById('docx-search');
+        const docxPreviewPanel = document.getElementById('docx-preview-panel');
+        const docxPreviewTitle = document.getElementById('docx-preview-title');
+        const docxPreviewFrame = document.getElementById('docx-preview-frame');
+        const docxPreviewClose = document.getElementById('docx-preview-close');
+
+        function getDocumentUrl(fileName) {
+            const basePath = window.location.href.replace(/\/[^/]*$/, '/');
+            return `${basePath}${encodeURIComponent(fileName)}`;
         }
 
-        function renderListPreviews() {
-            document.querySelectorAll('.day ul').forEach((ul) => {
-                if (ul.previousElementSibling && ul.previousElementSibling.classList.contains('list-preview-block')) {
-                    return;
-                }
+        function openDocPreview(fileName) {
+            const fullUrl = getDocumentUrl(fileName);
+            docxPreviewTitle.textContent = fileName;
+            docxPreviewFrame.src = `https://view.officeapps.live.com/op/embed.aspx?src=${encodeURIComponent(fullUrl)}`;
+            docxPreviewPanel.style.display = 'block';
+            docxPreviewPanel.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        }
 
-                const wrapper = document.createElement('div');
-                wrapper.className = 'list-preview-block';
-                wrapper.innerHTML = '<div class="list-preview-label">Aperçu</div><div class="list-preview"></div>';
-                const preview = wrapper.querySelector('.list-preview');
+        function renderDocuments(filter = '') {
+            const term = filter.toLowerCase();
+            docxList.innerHTML = '';
 
-                const items = Array.from(ul.querySelectorAll('li'))
-                    .map((li) => li.textContent.trim())
-                    .filter(Boolean);
+            const filtered = documents.filter((doc) => doc.name.toLowerCase().includes(term));
 
-                if (items.length === 0) {
-                    preview.innerHTML = '<span class="preview-empty">Aucun élément</span>';
-                } else {
-                    const visibleItems = items.slice(0, 4);
-                    preview.innerHTML = visibleItems.map((item) => `<span class="preview-pill">${escapeHtml(item)}</span>`).join('');
-                    if (items.length > visibleItems.length) {
-                        preview.innerHTML += `<span class="preview-pill">+${items.length - visibleItems.length}</span>`;
-                    }
-                }
+            filtered.forEach((doc) => {
+                const li = document.createElement('li');
+                li.className = 'docx-card';
+                li.innerHTML = `
+                    <div class="docx-card-main">
+                        <div class="docx-icon">${doc.emoji}</div>
+                        <div class="docx-info">
+                            <a href="${doc.name}" target="_blank" rel="noopener noreferrer">${doc.name}</a>
+                            <div class="docx-meta">Document Word · .docx</div>
+                        </div>
+                    </div>
+                    <div class="docx-actions">
+                        <button class="docx-btn docx-btn-preview" type="button">Aperçu</button>
+                        <button class="docx-btn docx-btn-download" type="button">Télécharger</button>
+                    </div>
+                `;
 
-                ul.before(wrapper);
+                const previewBtn = li.querySelector('.docx-btn-preview');
+                const downloadBtn = li.querySelector('.docx-btn-download');
+
+                previewBtn.addEventListener('click', () => openDocPreview(doc.name));
+                downloadBtn.addEventListener('click', () => {
+                    window.open(doc.name, '_blank', 'noopener,noreferrer');
+                });
+
+                docxList.appendChild(li);
             });
         }
 
-        renderListPreviews();
+        docxSearch.addEventListener('input', (event) => renderDocuments(event.target.value));
+        docxPreviewClose.addEventListener('click', () => {
+            docxPreviewPanel.style.display = 'none';
+            docxPreviewFrame.src = '';
+        });
+
+        renderDocuments();
 
         if ('serviceWorker' in navigator) {
             window.addEventListener('load', () => {
